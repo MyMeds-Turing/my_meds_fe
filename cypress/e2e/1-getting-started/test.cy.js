@@ -1,5 +1,5 @@
 
-describe('Initial test for CI/CD check', () => {
+describe('Initial cypress test for CI/CD check', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/')
   })
