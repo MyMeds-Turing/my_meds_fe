@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Form.css';
 
-type userProps = {
-    userID: string
+type UserProps = {
+    userID: number
   }
 
-const Form: React.FC<userProps> =({ userID }) => {
+const Form: React.FC<UserProps> =({ userID }) => {
+  const [medicine, setMedicine] = useState('')
+  const [allMeds, setAllMeds] = useState<Array<string>>([])
+  
 
+
+
+  useEffect(() => {
+    fetch('https://rxnav.nlm.nih.gov/REST/displaynames.json')
+      .then(response => response.json())
+      .then(data => console.log(data))   
+  }, [])
 
   return (
     <div>
