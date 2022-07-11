@@ -1,0 +1,11 @@
+.form__live-search-results-box{
+    border: 2px solid black;
+    width: 40vw;
+    height: 30vh;
+    margin-left: 30vw;
+}
+
+.form__search-result:hover{
+    background-color: aquamarine;
+    cursor: pointer;
+}
