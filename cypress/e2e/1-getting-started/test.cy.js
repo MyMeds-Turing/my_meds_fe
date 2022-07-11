@@ -5,7 +5,7 @@ describe('Initial cypress test for CI/CD check', () => {
   })
 
   it('Test runs and displays React page', () => {
-    cy.get('p').contains('Edit')
+    cy.get('h2').contains('Welcome')
   })
 
 })
