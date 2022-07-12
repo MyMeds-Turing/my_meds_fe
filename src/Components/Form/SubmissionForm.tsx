@@ -1,5 +1,6 @@
 import { stringify } from "querystring";
 import React, { ChangeEvent, useState } from "react";
+import Graphic from "../Graphic/Graphic";
 import { Prescription } from '../../interfaces'
 import './SubmissionForm.css'
 
@@ -54,7 +55,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
     }
 
     console.log(formData)
-    
+
     return (
         <div className='form-inputs'>
             <div className="frequency-section">
@@ -76,7 +77,6 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                 </select>
 
             </div>
-            {/* For Dosage Input, we built as text input and did not include total pills/prescription to accomodate for non-pill form (liquids, sprays, etc.), and varying  number of pills/milligram edge cases*/}
             <div className="dosage-section">
                 <label htmlFor="dosage-num">Dosage: </label>
                 <input
@@ -98,7 +98,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                     name='doses-remaining'
                     value={formData.dosesRemaining} required
                 />
-                <br/>
+                <br />
                 <label htmlFor="doses-total">Total Doses: </label>
                 <input
                     onChange={(event) => { handleChange('totalDoses', parseInt(event.target.value)) }}
@@ -150,10 +150,28 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                         name="reminder"
                         onChange={(event) => handleChange('additionalInstructions', event.target.value)} />
                     <br />
+                    <div className="icon-selector">
+                        <label htmlFor="icon">Choose an icon</label>
+                        <br />
+                        <input
+                            type="radio"
+                            id="icon"
+                            name="icon"
+                            value="capsule"
+                            onChange={(event) => handleChange('icon', event.target.value)} />
+                        <Graphic tag={'capsule'} />
+                        <input
+                            type="radio"
+                            id="icon"
+                            name="icon"
+                            value="roundPill"
+                            onChange={(event) => handleChange('icon', event.target.value)} />
+                        <Graphic tag={'roundPill'} />
+                    </div>
                     <br />
                 </div>
             </div>
-                <button onClick={() => handleFrequency()}>Submit</button>
+            <button onClick={() => handleFrequency()}>Submit</button>
         </div>
     )
 }
