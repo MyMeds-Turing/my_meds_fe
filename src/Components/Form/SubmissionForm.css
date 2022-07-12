@@ -1,0 +1,11 @@
+.form-inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 70vh;
+}
+
+/* .dosage-section {
+    display: flex;
+    flex-direction: column;
+} */
