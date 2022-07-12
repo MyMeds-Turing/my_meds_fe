@@ -1,5 +1,7 @@
+import { stringify } from "querystring";
 import React, { ChangeEvent, useState } from "react";
 import { Prescription } from '../../interfaces'
+import './SubmissionForm.css'
 
 type MedProps = {
     chosenMedicine: string
@@ -15,6 +17,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
         dosesRemaining: 0,
         dosage: '',
         userInstructions: [],
+        otherInstructions: '',
         doctorInstructions: '',
         icon: ''
     })
@@ -36,10 +39,17 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
     }
 
     const handleCheckBoxes = (instruction: string) => {
-        setFormData({
-            ...formData,
-            userInstructions: [...formData.userInstructions, instruction]
-        })
+        if (!formData.userInstructions.includes(instruction)) {
+            setFormData({
+                ...formData,
+                userInstructions: [...formData.userInstructions, instruction]
+            })
+        } else {
+            setFormData({
+                ...formData,
+                userInstructions: formData.userInstructions.filter(ins => ins !== instruction)
+            })
+        }
     };
 
     const handleChange = (field: string, e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
@@ -47,7 +57,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
     }
     console.log(formData)
     return (
-        <>
+        <div className='form-inputs'>
             <div className="frequency-section">
                 <label htmlFor="frequency-num">Every</label>
                 <input
@@ -69,7 +79,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
             </div>
             {/* For Dosage Input, we built as text input and did not include total pills/prescription to accomodate for non-pill form (liquids, sprays, etc.), and varying  number of pills/milligram edge cases*/}
             <div className="dosage-section">
-                <label htmlFor="dosage-num">Dosage</label>
+                <label htmlFor="dosage-num">Dosage: </label>
                 <input
                     onChange={(e) => { handleChange('dosage', e) }}
                     className="dosage-num"
@@ -78,7 +88,8 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                     name='dosage-num'
                     value={formData.dosage} required
                 />
-                <label htmlFor="doses-remaining">Remaining Doses</label>
+                <br />
+                <label htmlFor="doses-remaining">Remaining Doses: </label>
                 <input
                     onChange={(e) => { handleChange('dosesRemaining', e) }}
                     className="doses-remaining"
@@ -98,15 +109,52 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                         name="reminder"
                         value="No Alcohol"
                         onChange={(e) => handleCheckBoxes(e.target.value)} /> No Alcohol
+                    <br />
                     <input
                         type="checkbox"
                         id="reminder"
                         name="reminder"
                         value="May Induce Drowziness"
                         onChange={(e) => handleCheckBoxes(e.target.value)} /> May Induce Drowziness
+                    <br />
+                    <input
+                        type="checkbox"
+                        id="reminder"
+                        name="reminder"
+                        value="Take With Food"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} /> Take With Food
+                    <br />
+                    <input
+                        type="checkbox"
+                        id="reminder"
+                        name="reminder"
+                        value="No Heavy Machinery"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} /> No Heavy Machinery
+                    <br />
+                    <input
+                        type="checkbox"
+                        id="reminder"
+                        name="reminder"
+                        value="Take in the Morning"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} /> Take in the Morning
+                    <br />
+                    <p>Other Instructions:</p>
+                    <input
+                        type="text"
+                        id="reminder"
+                        name="reminder"
+                        onChange={(e) => handleChange('otherInstructions', e)} />
+                    <br />
+                    <p>Doctor Instructions:</p>
+                    <input
+                        type="text"
+                        id="reminder"
+                        name="reminder"
+                        onChange={(e) => handleChange('doctorInstructions', e)} />
+                    <br />
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

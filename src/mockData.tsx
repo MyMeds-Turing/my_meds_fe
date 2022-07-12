@@ -17,6 +17,7 @@ export const user1: User =
             dosesRemaining: 25,
             dosage: '25',
             userInstructions: ['take with food', 'no alcohol', 'no heavy machinery'],
+            otherInstructions: 'whatever',
             doctorInstructions: 'none',
             icon: 'blue_pill'
         }
