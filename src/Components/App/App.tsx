@@ -6,17 +6,23 @@ import { User } from '../../interfaces'
 import { user1 } from '../../mockData'
 import { Route } from 'react-router-dom'
 import SearchForm from '../Form/SearchForm';
+import { useQuery, gql } from '@apollo/client';
+import { Dashboard } from '../Dashboard/Dashboard';
+
 
 const App = () => {
   const [user, setUser] = useState<User>()
 
   useEffect(() => {
+    // const client = ...
+
     setUser(user1)
   }, [])
 
   return (
 
     <div className="App">
+      <Dashboard />
       {user ? <Nav name={user.name} /> : <Nav name={'No user found'} />}
       <Route exact path='/add-new'>
         {user ? <SearchForm userID={user.id} /> : <SearchForm userID={0} />}
