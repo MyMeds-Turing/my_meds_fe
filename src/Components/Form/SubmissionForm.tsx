@@ -1,46 +1,66 @@
 import React, { ChangeEvent, useState } from "react";
+import { Prescription } from '../../interfaces'
 
 type MedProps = {
     chosenMedicine: string
 }
 
 const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
-    const [formData, setFormData] = useState({
-        every: '',
-        frequency: '',
-        dosage: '',
+    const [formData, setFormData] = useState<Prescription>({
+        med_name: chosenMedicine,
+        timeOfLastDose: '',
+        timeOfNextDose: '',
+        frequencyInMin: 0,
+        totalDoses: 0,
         dosesRemaining: 0,
+        dosage: '',
         userInstructions: [],
         doctorInstructions: '',
         icon: ''
     })
 
-    // isChecked does not work yet/will check all boxes!!! 
-    const [isChecked, setIsChecked] = useState(false);
+    const [frequencyNum, setFrequencyNum] = useState<number>(0)
 
-    const handleOnChange = () => {
-        setIsChecked(!isChecked);
+    const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
+
+    const handleFrequency = () => {
+        let multiplier: number;
+
+        frequencyUnits === 'hour' ? multiplier = 60 :
+            frequencyUnits === 'day' ? multiplier = 1440 : multiplier = 10080
+
+        setFormData({
+            ...formData,
+            frequencyInMin: frequencyNum * multiplier
+        })
+    }
+
+    const handleCheckBoxes = (instruction: string) => {
+        setFormData({
+            ...formData,
+            userInstructions: [...formData.userInstructions, instruction]
+        })
     };
 
     const handleChange = (field: string, e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
         setFormData({ ...formData, [field]: e.target.value })
     }
-
+    console.log(formData)
     return (
         <>
             <div className="frequency-section">
                 <label htmlFor="frequency-num">Every</label>
                 <input
-                    onChange={(e) => { handleChange('every', e) }}
+                    onChange={(e) => setFrequencyNum(parseInt(e.target.value))}
                     className="frequency-num"
                     type='number'
                     placeholder='0'
                     min='0'
                     name='frequency-num'
-                    value={formData.every} required
+                    required
                 />
-                <select name="frequency" className="form-tag" value={formData.frequency}
-                    onChange={(e) => { handleChange('frequency', e) }} required>
+                <select name="frequency" className="form-tag"
+                    onChange={(e) => setFrequencyUnits(e.target.value)} required>
                     <option value="hours">hours</option>
                     <option value="days">days</option>
                     <option value="weeks">weeks</option>
@@ -76,17 +96,14 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                         type="checkbox"
                         id="reminder"
                         name="reminder"
-                        value="No-alcohol"
-                        checked={isChecked}
-                        onChange={handleOnChange} /> test
+                        value="No Alcohol"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} /> No Alcohol
                     <input
                         type="checkbox"
                         id="reminder"
                         name="reminder"
-                        value="Snooze Town"
-                        checked={isChecked}
-                        onChange={handleOnChange}
-                    />
+                        value="May Induce Drowziness"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} /> May Induce Drowziness
                 </div>
             </div>
         </>

@@ -10,10 +10,11 @@ export interface User {
 export interface Prescription {
     med_name: string,
     timeOfLastDose: string,
-    timeOfNextDose: string, 
+    timeOfNextDose: string,
     frequencyInMin: number,
     totalDoses: number,
     dosesRemaining: number,
+    dosage: string,
     userInstructions: Array<string>,
     doctorInstructions: string,
     icon: string
