@@ -17,18 +17,15 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
         dosesRemaining: 0,
         dosage: '',
         userInstructions: [],
-        otherInstructions: '',
-        doctorInstructions: '',
+        additionalInstructions: '',
         icon: ''
     })
 
     const [frequencyNum, setFrequencyNum] = useState<number>(0)
-
     const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
 
     const handleFrequency = () => {
         let multiplier: number;
-
         frequencyUnits === 'hour' ? multiplier = 60 :
             frequencyUnits === 'day' ? multiplier = 1440 : multiplier = 10080
 
@@ -52,10 +49,12 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
         }
     };
 
-    const handleChange = (field: string, e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
-        setFormData({ ...formData, [field]: e.target.value })
+    const handleChange = (field: string, userInput: string | number) => {
+        setFormData({ ...formData, [field]: userInput })
     }
+
     console.log(formData)
+    
     return (
         <div className='form-inputs'>
             <div className="frequency-section">
@@ -71,9 +70,9 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                 />
                 <select name="frequency" className="form-tag"
                     onChange={(e) => setFrequencyUnits(e.target.value)} required>
-                    <option value="hours">hours</option>
-                    <option value="days">days</option>
-                    <option value="weeks">weeks</option>
+                    <option value="hour">hours</option>
+                    <option value="day">days</option>
+                    <option value="week">weeks</option>
                 </select>
 
             </div>
@@ -81,7 +80,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
             <div className="dosage-section">
                 <label htmlFor="dosage-num">Dosage: </label>
                 <input
-                    onChange={(e) => { handleChange('dosage', e) }}
+                    onChange={(event) => { handleChange('dosage', event.target.value) }}
                     className="dosage-num"
                     type='text'
                     placeholder='Ex. 10mg'
@@ -91,12 +90,23 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                 <br />
                 <label htmlFor="doses-remaining">Remaining Doses: </label>
                 <input
-                    onChange={(e) => { handleChange('dosesRemaining', e) }}
+                    onChange={(event) => { handleChange('dosesRemaining', parseInt(event.target.value)) }}
                     className="doses-remaining"
                     type='number'
                     placeholder='0'
                     min='0'
                     name='doses-remaining'
+                    value={formData.dosesRemaining} required
+                />
+                <br/>
+                <label htmlFor="doses-total">Total Doses: </label>
+                <input
+                    onChange={(event) => { handleChange('totalDoses', parseInt(event.target.value)) }}
+                    className="doses-total"
+                    type='number'
+                    placeholder='0'
+                    min='0'
+                    name='doses-total'
                     value={formData.dosesRemaining} required
                 />
             </div>
@@ -105,55 +115,45 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                 <div className="reminders">
                     <input
                         type="checkbox"
-                        id="reminder"
                         name="reminder"
                         value="No Alcohol"
                         onChange={(e) => handleCheckBoxes(e.target.value)} /> No Alcohol
                     <br />
                     <input
                         type="checkbox"
-                        id="reminder"
                         name="reminder"
                         value="May Induce Drowziness"
                         onChange={(e) => handleCheckBoxes(e.target.value)} /> May Induce Drowziness
                     <br />
                     <input
                         type="checkbox"
-                        id="reminder"
                         name="reminder"
                         value="Take With Food"
                         onChange={(e) => handleCheckBoxes(e.target.value)} /> Take With Food
                     <br />
                     <input
                         type="checkbox"
-                        id="reminder"
                         name="reminder"
                         value="No Heavy Machinery"
                         onChange={(e) => handleCheckBoxes(e.target.value)} /> No Heavy Machinery
                     <br />
                     <input
                         type="checkbox"
-                        id="reminder"
                         name="reminder"
                         value="Take in the Morning"
                         onChange={(e) => handleCheckBoxes(e.target.value)} /> Take in the Morning
                     <br />
-                    <p>Other Instructions:</p>
+                    <p>Additional Instructions:</p>
                     <input
                         type="text"
                         id="reminder"
                         name="reminder"
-                        onChange={(e) => handleChange('otherInstructions', e)} />
+                        onChange={(event) => handleChange('additionalInstructions', event.target.value)} />
                     <br />
-                    <p>Doctor Instructions:</p>
-                    <input
-                        type="text"
-                        id="reminder"
-                        name="reminder"
-                        onChange={(e) => handleChange('doctorInstructions', e)} />
                     <br />
                 </div>
             </div>
+                <button onClick={() => handleFrequency()}>Submit</button>
         </div>
     )
 }

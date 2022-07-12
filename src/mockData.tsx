@@ -15,11 +15,11 @@ export const user1: User =
             frequencyInMin: 1456,
             totalDoses: 100,
             dosesRemaining: 25,
-            dosage: '25',
+            dosage: '25mg',
             userInstructions: ['take with food', 'no alcohol', 'no heavy machinery'],
-            otherInstructions: 'whatever',
-            doctorInstructions: 'none',
+            additionalInstructions: 'DO NOT FORGET',
             icon: 'blue_pill'
         }
     ]
 }
+

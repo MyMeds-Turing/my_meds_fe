@@ -16,7 +16,6 @@ export interface Prescription {
     dosesRemaining: number,
     dosage: string,
     userInstructions: Array<string>,
-    otherInstructions: string,
-    doctorInstructions: string,
+    additionalInstructions: string,
     icon: string
 }
