@@ -30,7 +30,7 @@ const root = ReactDOM.createRoot(
 
 const link = from([
   // errorLink,
-  new HttpLink({ uri: " https://my-meds-be.herokuapp.com/graphql" }),
+  new HttpLink({ uri: "https://my-meds-be.herokuapp.com/graphql" }),
 ]);
 
 const client = new ApolloClient({

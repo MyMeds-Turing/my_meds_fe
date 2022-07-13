@@ -13,6 +13,9 @@ const Nav: React.FC<UserProps> = ({name}) => {
     
         <nav>
             <h2>Welcome, {name}</h2>
+            <NavLink to='/' className='navButton'>
+                Home
+            </NavLink>
             <NavLink to='/add-new' className='navButton'>
                 Add new med
             </NavLink>

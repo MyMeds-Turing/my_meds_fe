@@ -17,15 +17,23 @@ import { useQuery } from "@apollo/client";
 const App = () => {
   const [user, setUser] = useState<dummyUser>()
   const [meds, setMeds] = useState<dummyMed[]>([])
-  const { loading, data } = useQuery(GET_USER)
-  console.log(data);
-
+  const { loading, error, data } = useQuery(GET_USER)
+  
   useEffect(() => {
     if (data) {
       setUser(data.fetchUser);
       setMeds(data.Rxs)
     }
+    console.log(data)
   }, [data]);
+ 
+  if (loading) {
+    return <h1>LOADING...</h1>
+  }
+
+  if (error) {
+    return <h1>SOMETHING WENT WRONG...</h1>
+  }
 
   return (
     <div className="App">
