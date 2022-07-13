@@ -12,6 +12,10 @@ export const GET_USER = gql`
             medName
             dose
             timeOfNextDose
+            dosesRemaining
+            userInstructions
+            additionalInstructions
+            icon
          }
     }
 `

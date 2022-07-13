@@ -1,6 +1,53 @@
+* {
+    margin: 1%
+}
+
+.med-name {
+    font-size: 30px;
+    margin-bottom: -1vh;
+}
+
+.med-box {
+    display: flex;
+    justify-content: center;
+}
+
 .med-reminder {
     border: 2px solid cornflowerblue;
     border-radius: 10px;
     width: 50vw;
+    height: 35vh;
     margin: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
+
+.med-button-info-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    margin-left: 3vw;
+}
+
+.med-info-box {
+    position: absolute;
+    z-index: 9999;
+    border: 1px solid black;
+    border-radius: 12px;
+    width: 35vw;
+    height: 22vh;
+    background-color: rgb(136, 200, 241);
+    margin-top: 7vh;
+}
+
+.med-info-hover{
+    margin-left: 1vw;
+}
+
+.med-info-hover:hover{
+    cursor: pointer;
+}
+

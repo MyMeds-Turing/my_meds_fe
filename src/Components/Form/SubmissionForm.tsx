@@ -1,4 +1,3 @@
-import { stringify } from "querystring";
 import React, { ChangeEvent, useState } from "react";
 import Graphic from "../Graphic/Graphic";
 import { Prescription } from '../../interfaces'
@@ -10,13 +9,14 @@ type MedProps = {
 
 const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
     const [formData, setFormData] = useState<Prescription>({
-        med_name: chosenMedicine,
+        id: 0,
+        medName: chosenMedicine,
         timeOfLastDose: '',
         timeOfNextDose: '',
         frequencyInMin: 0,
         totalDoses: 0,
         dosesRemaining: 0,
-        dosage: '',
+        dose: '',
         userInstructions: [],
         additionalInstructions: '',
         icon: ''
@@ -80,12 +80,12 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
             <div className="dosage-section">
                 <label htmlFor="dosage-num">Dosage: </label>
                 <input
-                    onChange={(event) => { handleChange('dosage', event.target.value) }}
+                    onChange={(event) => { handleChange('dose', event.target.value) }}
                     className="dosage-num"
                     type='text'
                     placeholder='Ex. 10mg'
                     name='dosage-num'
-                    value={formData.dosage} required
+                    value={formData.dose} required
                 />
                 <br />
                 <label htmlFor="doses-remaining">Remaining Doses: </label>
@@ -107,7 +107,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                     placeholder='0'
                     min='0'
                     name='doses-total'
-                    value={formData.dosesRemaining} required
+                    value={formData.totalDoses} required
                 />
             </div>
             <div className="user-instructions">
