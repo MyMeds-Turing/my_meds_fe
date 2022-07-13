@@ -19,3 +19,17 @@ export interface Prescription {
     additionalInstructions: string,
     icon: string
 }
+
+
+export interface dummyUser {
+    id: number,
+    email: string,
+    fullName: string
+}
+
+export interface dummyMed {
+    id: number,
+    medName: string,
+    dose: string,
+    timeOfNextDose: string
+}
