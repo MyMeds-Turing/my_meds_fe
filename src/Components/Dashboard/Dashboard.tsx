@@ -1,6 +1,7 @@
 import React from "react";
 import { dummyMed } from '../../interfaces'
 import MedReminder from './MedReminder';
+import './Dashboard.css';
 
 type MedProps = {
     meds: dummyMed[]
@@ -9,7 +10,7 @@ type MedProps = {
 const Dashboard: React.FC<MedProps> = ({ meds }) => {
     const userMeds = meds.map(rx => {
         return (
-            <MedReminder med={rx} />
+            <MedReminder med={rx} key={rx.id} />
         )
     })
     return (

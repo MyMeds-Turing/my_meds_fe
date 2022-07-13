@@ -33,7 +33,7 @@ const App = () => {
       <Route exact path='/add-new'>
         {user ? <SearchForm userID={user.id} /> : <SearchForm userID={0} />}
       </Route>
-      <Dashboard meds={meds} />
+      <Route exact path="/"><Dashboard meds={meds}/></Route>
     </div>
   );
 }
