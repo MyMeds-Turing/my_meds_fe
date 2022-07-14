@@ -8,11 +8,9 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  gql,
   HttpLink,
   from
 } from '@apollo/client';
-import { onError } from "@apollo/client/link/error";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

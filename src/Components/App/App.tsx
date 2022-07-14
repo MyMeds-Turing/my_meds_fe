@@ -18,15 +18,15 @@ const App = () => {
   const [user, setUser] = useState<dummyUser>()
   const [meds, setMeds] = useState<dummyMed[]>([])
   const { loading, error, data } = useQuery(GET_USER)
-  
+
   useEffect(() => {
     if (data) {
       setUser(data.fetchUser);
-      setMeds(data.Rxs)
+      setMeds(data.fetchUserRxs)
     }
     console.log(data)
   }, [data]);
- 
+
   if (loading) {
     return <h1>LOADING...</h1>
   }
@@ -39,9 +39,9 @@ const App = () => {
     <div className="App">
       {user ? <Nav name={user.fullName} /> : <Nav name={'No user found'} />}
       <Route exact path='/add-new'>
-        {user ? <SearchForm userID={user.id} /> : <SearchForm userID={0} />}
+          {user ? <SearchForm userID={user.id} /> : <SearchForm userID={0} />}
       </Route>
-      <Route exact path="/"><Dashboard meds={meds}/></Route>
+      <Route exact path="/"><Dashboard meds={meds} /></Route>
     </div>
   );
 }

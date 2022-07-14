@@ -35,7 +35,7 @@ const SearchForm: React.FC<UserProps> = ({ userID }) => {
   }
 
   return (
-    <div>
+    <div className="form-wrapper">
       <div className='form__medicine-lookup'>
         <h2>{chosenMedicine || 'Search Medicine'}</h2>
         {!showSubmissionForm && <input type='text' placeholder='Medicine Name' onChange={event => displaySearchResults(event.target.value)} />}

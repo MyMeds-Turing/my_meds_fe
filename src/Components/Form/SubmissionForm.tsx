@@ -112,37 +112,48 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
             </div>
             <div className="user-instructions">
                 <label htmlFor="user-instructions">Reminders</label>
+
                 <div className="reminders">
+                    <div className="reminder-icon-section">
                     <input
                         type="checkbox"
                         name="reminder"
-                        value="No Alcohol"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> No Alcohol
+                        value="no_alcohol"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'noAlcohol'} />
+                    No Alcohol
                     <br />
                     <input
                         type="checkbox"
                         name="reminder"
-                        value="May Induce Drowziness"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> May Induce Drowziness
+                        value="may_induce_drowziness"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'mayInduceDrowziness'} />May Induce Drowziness
                     <br />
                     <input
                         type="checkbox"
                         name="reminder"
-                        value="Take With Food"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> Take With Food
+                        value="take_with_food"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'takeWithFood'} />Take With Food
                     <br />
                     <input
                         type="checkbox"
                         name="reminder"
-                        value="No Heavy Machinery"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> No Heavy Machinery
+                        value="no_heavy_machinery"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'noHeavyMachinery'} />No Heavy Machinery
                     <br />
                     <input
                         type="checkbox"
                         name="reminder"
-                        value="Take in the Morning"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> Take in the Morning
+                        value="take_in_the_morning"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />Take in the Morning
                     <br />
+                    <input
+                        type="checkbox"
+                        name="reminder"
+                        value="take_in_the_evening"
+                        onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheEvening'} />Take in the Evening
+                    <br />
+                    </div>
+
                     <p>Additional Instructions:</p>
                     <input
                         type="text"
@@ -167,6 +178,34 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                             value="roundPill"
                             onChange={(event) => handleChange('icon', event.target.value)} />
                         <Graphic tag={'roundPill'} />
+                        <input
+                            type="radio"
+                            id="icon"
+                            name="icon"
+                            value="dropper"
+                            onChange={(event) => handleChange('icon', event.target.value)} />
+                        <Graphic tag={'dropper'} />
+                        <input
+                            type="radio"
+                            id="icon"
+                            name="icon"
+                            value="fourPack"
+                            onChange={(event) => handleChange('icon', event.target.value)} />
+                        <Graphic tag={'fourPack'} />
+                        <input
+                            type="radio"
+                            id="icon"
+                            name="icon"
+                            value="medicineBottle"
+                            onChange={(event) => handleChange('icon', event.target.value)} />
+                        <Graphic tag={'medicineBottle'} />
+                        <input
+                            type="radio"
+                            id="icon"
+                            name="icon"
+                            value="paste"
+                            onChange={(event) => handleChange('icon', event.target.value)} />
+                        <Graphic tag={'paste'} />
                     </div>
                     <br />
                 </div>
