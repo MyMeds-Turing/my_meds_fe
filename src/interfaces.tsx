@@ -8,14 +8,32 @@ export interface User {
 }
 
 export interface Prescription {
-    med_name: string,
+    id: number,
+    medName: string,
     timeOfLastDose: string,
     timeOfNextDose: string,
     frequencyInMin: number,
     totalDoses: number,
     dosesRemaining: number,
-    dosage: string,
+    dose: string,
     userInstructions: Array<string>,
     additionalInstructions: string,
     icon: string
+}
+
+
+export interface dummyUser {
+    id: number,
+    email: string,
+    fullName: string
+}
+
+export interface dummyMed {
+    id: number,
+    medName: string,
+    dose: string,
+    timeOfNextDose: string,
+    userInstructions: Array<string>
+    additionalInstructions: string,
+    dosesRemaining: number,
 }

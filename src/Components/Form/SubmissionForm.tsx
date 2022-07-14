@@ -1,4 +1,3 @@
-import { stringify } from "querystring";
 import React, { ChangeEvent, useState } from "react";
 import Graphic from "../Graphic/Graphic";
 import { Prescription } from '../../interfaces'
@@ -10,13 +9,14 @@ type MedProps = {
 
 const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
     const [formData, setFormData] = useState<Prescription>({
-        med_name: chosenMedicine,
+        id: 0,
+        medName: chosenMedicine,
         timeOfLastDose: '',
         timeOfNextDose: '',
         frequencyInMin: 0,
         totalDoses: 0,
         dosesRemaining: 0,
-        dosage: '',
+        dose: '',
         userInstructions: [],
         additionalInstructions: '',
         icon: ''
@@ -59,6 +59,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
     return (
         <div className='form-inputs'>
             <div className="frequency-section">
+                <h2>{chosenMedicine}</h2>
                 <label htmlFor="frequency-num">Every</label>
                 <input
                     onChange={(e) => setFrequencyNum(parseInt(e.target.value))}
@@ -80,12 +81,12 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
             <div className="dosage-section">
                 <label htmlFor="dosage-num">Dosage: </label>
                 <input
-                    onChange={(event) => { handleChange('dosage', event.target.value) }}
+                    onChange={(event) => { handleChange('dose', event.target.value) }}
                     className="dosage-num"
                     type='text'
                     placeholder='Ex. 10mg'
                     name='dosage-num'
-                    value={formData.dosage} required
+                    value={formData.dose} required
                 />
                 <br />
                 <label htmlFor="doses-remaining">Remaining Doses: </label>
@@ -107,42 +108,53 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                     placeholder='0'
                     min='0'
                     name='doses-total'
-                    value={formData.dosesRemaining} required
+                    value={formData.totalDoses} required
                 />
             </div>
             <div className="user-instructions">
                 <label htmlFor="user-instructions">Reminders</label>
+
                 <div className="reminders">
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="No Alcohol"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> No Alcohol
-                    <br />
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="May Induce Drowziness"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> May Induce Drowziness
-                    <br />
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="Take With Food"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> Take With Food
-                    <br />
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="No Heavy Machinery"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> No Heavy Machinery
-                    <br />
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="Take in the Morning"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> Take in the Morning
-                    <br />
+                    <div className="reminder-icon-section">
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="no_alcohol"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'noAlcohol'} />
+                        No Alcohol
+                        <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="may_induce_drowziness"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'mayInduceDrowziness'} />May Induce Drowziness
+                        <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="take_with_food"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'takeWithFood'} />Take With Food
+                        <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="no_heavy_machinery"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'noHeavyMachinery'} />No Heavy Machinery
+                        <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="take_in_the_morning"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />Take in the Morning
+                        <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="take_in_the_evening"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheEvening'} />Take in the Evening
+                        <br />
+                    </div>
+
                     <p>Additional Instructions:</p>
                     <input
                         type="text"
@@ -167,6 +179,34 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                             value="roundPill"
                             onChange={(event) => handleChange('icon', event.target.value)} />
                         <Graphic tag={'roundPill'} />
+                        <input
+                            type="radio"
+                            id="icon"
+                            name="icon"
+                            value="dropper"
+                            onChange={(event) => handleChange('icon', event.target.value)} />
+                        <Graphic tag={'dropper'} />
+                        <input
+                            type="radio"
+                            id="icon"
+                            name="icon"
+                            value="fourPack"
+                            onChange={(event) => handleChange('icon', event.target.value)} />
+                        <Graphic tag={'fourPack'} />
+                        <input
+                            type="radio"
+                            id="icon"
+                            name="icon"
+                            value="medicineBottle"
+                            onChange={(event) => handleChange('icon', event.target.value)} />
+                        <Graphic tag={'medicineBottle'} />
+                        <input
+                            type="radio"
+                            id="icon"
+                            name="icon"
+                            value="paste"
+                            onChange={(event) => handleChange('icon', event.target.value)} />
+                        <Graphic tag={'paste'} />
                     </div>
                     <br />
                 </div>

@@ -1,4 +1,4 @@
-.form__live-search-results-box{
+.form__live-search-results-box {
     border: 2px solid black;
     width: 40vw;
     height: 30vh;
@@ -6,7 +6,15 @@
     overflow-y: auto;
 }
 
-.form__search-result:hover{
+.form__search-result:hover {
     background-color: aquamarine;
     cursor: pointer;
+}
+
+.form-wrapper {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
 }
