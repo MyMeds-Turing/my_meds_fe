@@ -59,6 +59,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
     return (
         <div className='form-inputs'>
             <div className="frequency-section">
+                <h2>{chosenMedicine}</h2>
                 <label htmlFor="frequency-num">Every</label>
                 <input
                     onChange={(e) => setFrequencyNum(parseInt(e.target.value))}
@@ -115,43 +116,43 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
 
                 <div className="reminders">
                     <div className="reminder-icon-section">
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="no_alcohol"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'noAlcohol'} />
-                    No Alcohol
-                    <br />
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="may_induce_drowziness"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'mayInduceDrowziness'} />May Induce Drowziness
-                    <br />
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="take_with_food"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'takeWithFood'} />Take With Food
-                    <br />
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="no_heavy_machinery"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'noHeavyMachinery'} />No Heavy Machinery
-                    <br />
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="take_in_the_morning"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />Take in the Morning
-                    <br />
-                    <input
-                        type="checkbox"
-                        name="reminder"
-                        value="take_in_the_evening"
-                        onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheEvening'} />Take in the Evening
-                    <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="no_alcohol"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'noAlcohol'} />
+                        No Alcohol
+                        <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="may_induce_drowziness"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'mayInduceDrowziness'} />May Induce Drowziness
+                        <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="take_with_food"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'takeWithFood'} />Take With Food
+                        <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="no_heavy_machinery"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'noHeavyMachinery'} />No Heavy Machinery
+                        <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="take_in_the_morning"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />Take in the Morning
+                        <br />
+                        <input
+                            type="checkbox"
+                            name="reminder"
+                            value="take_in_the_evening"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheEvening'} />Take in the Evening
+                        <br />
                     </div>
 
                     <p>Additional Instructions:</p>
