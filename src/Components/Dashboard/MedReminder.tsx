@@ -11,7 +11,9 @@ type MedProps = {
 const MedReminder: React.FC<MedProps> = ({ med }) => {
     const [infoHover, setInfoHover] = useState('hidden')
     const [refillHover, setRefillHover] = useState('hidden')
-
+    
+    const showWarning = med.dosesRemaining > (med.totalDoses * .1) ? 'hidden' : ""
+   
     const nextDose = new Date(med.timeOfNextDose)
     const timeNow = new Date()
     const formatDate = nextDose.toLocaleString('en-US')
@@ -26,7 +28,7 @@ const MedReminder: React.FC<MedProps> = ({ med }) => {
             <div className="med-reminder">
                 <div className="med-name-container">
                     <h3 className="med-name">{med.medName}</h3>
-                    <img className='warning-icon' src={warningSign} onMouseEnter={() => setRefillHover('')} onMouseLeave={() => setRefillHover('hidden')} />
+                    <img className={`warning-icon ${showWarning}`} src={warningSign} onMouseEnter={() => setRefillHover('')} onMouseLeave={() => setRefillHover('hidden')} />
                 </div>
                 <p>Take {med.dose}</p>
                 <p>Next Dose: {formatDay} at {formatDate.substring(10)}</p>

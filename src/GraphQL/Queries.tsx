@@ -16,6 +16,7 @@ export const GET_USER = gql`
             userInstructions
             additionalInstructions
             icon
+            totalDoses
          }
     }
 `

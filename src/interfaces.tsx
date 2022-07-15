@@ -27,5 +27,6 @@ export interface QueryRx {
     userInstructions: Array<string>
     additionalInstructions: string,
     dosesRemaining: number,
-    icon: string
+    icon: string,
+    totalDoses: number
 }
