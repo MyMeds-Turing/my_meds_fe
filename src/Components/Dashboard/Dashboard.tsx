@@ -1,10 +1,10 @@
 import React from "react";
-import { dummyMed } from '../../interfaces'
+import { QueryRx } from '../../interfaces'
 import MedReminder from './MedReminder';
 import './Dashboard.css';
 
 type MedProps = {
-    meds: dummyMed[]
+    meds: QueryRx[]
 }
 
 const Dashboard: React.FC<MedProps> = ({ meds }) => {

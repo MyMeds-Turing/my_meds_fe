@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { dummyMed } from '../../interfaces'
+import { QueryRx } from '../../interfaces'
 import CountdownTimer from "../CountdownTimer/CountdownTimer";
 import './MedReminder.css'
 
 type MedProps = {
-    med: dummyMed
+    med: QueryRx
 }
 
 const MedReminder: React.FC<MedProps> = ({ med }) => {

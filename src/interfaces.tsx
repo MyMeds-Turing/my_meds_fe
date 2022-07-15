@@ -1,13 +1,11 @@
 export interface User {
     id: number,
-    name: string,
+    fullName: string,
     email: string,
-    phone: number,
-    notify: number,
-    Rx: Prescription[]
 }
 
-export interface Prescription {
+
+export interface MutationRx {
     id: number,
     medName: string,
     timeOfLastDose: string,
@@ -21,14 +19,7 @@ export interface Prescription {
     icon: string
 }
 
-
-export interface dummyUser {
-    id: number,
-    email: string,
-    fullName: string
-}
-
-export interface dummyMed {
+export interface QueryRx {
     id: number,
     medName: string,
     dose: string,
@@ -36,4 +27,5 @@ export interface dummyMed {
     userInstructions: Array<string>
     additionalInstructions: string,
     dosesRemaining: number,
+    icon: string
 }

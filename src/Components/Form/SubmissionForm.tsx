@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import Graphic from "../Graphic/Graphic";
-import { Prescription } from '../../interfaces'
+import { MutationRx } from '../../interfaces'
 import './SubmissionForm.css'
 
 type MedProps = {
@@ -8,7 +8,7 @@ type MedProps = {
 }
 
 const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
-    const [formData, setFormData] = useState<Prescription>({
+    const [formData, setFormData] = useState<MutationRx>({
         id: 0,
         medName: chosenMedicine,
         timeOfLastDose: '',
@@ -79,17 +79,35 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
 
             </div>
             <div className="dosage-section">
-                <label htmlFor="dosage-num">Dosage: </label>
+                <label htmlFor="dosage-num">Single Dose :</label>
                 <input
                     onChange={(event) => { handleChange('dose', event.target.value) }}
                     className="dosage-num"
-                    type='text'
-                    placeholder='Ex. 10mg'
+                    type='number'
+                    placeholder='0'
+                    min='0'
+                    step='any'
                     name='dosage-num'
                     value={formData.dose} required
                 />
+                <select name="dosage-unit" className="form-tag">
+                    <option value="pills">pill(s)</option>
+                    <option value="mg">mg(s)</option>
+                    <option value="ml">ml(s)</option>
+                    <option value="puff">puff(s)</option>
+                    <option value="tsp">tsp(s)</option>
+                </select>
                 <br />
-                <label htmlFor="doses-remaining">Remaining Doses: </label>
+
+                {/* 
+                Create separate state for dosage unit, use to interpolate into Total Prescription input?
+                Split dosage input into number and unit dropdown
+                Assumption is that user is filling this out with brand new/full prescription
+                Use unit from dosage input to ask user total amount of units listed in Rx ex. Quantity 30 pills, 500ml
+                Handle change for total doses to make calculation of what dose total is in prescription(dose number divided by total)
+
+                 */}
+                {/* <label htmlFor="doses-remaining">Remaining Doses: </label>
                 <input
                     onChange={(event) => { handleChange('dosesRemaining', parseInt(event.target.value)) }}
                     className="doses-remaining"
@@ -98,9 +116,16 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                     min='0'
                     name='doses-remaining'
                     value={formData.dosesRemaining} required
-                />
+                /> */}
+
+
+                {/* Feedback on ambiguous fields, for MVP just refactor Total Doses field to be more user friendly/informative 
+                
+                
+                */}
+
                 <br />
-                <label htmlFor="doses-total">Total Doses: </label>
+                <label htmlFor="doses-total">Total Quantity: </label>
                 <input
                     onChange={(event) => { handleChange('totalDoses', parseInt(event.target.value)) }}
                     className="doses-total"
