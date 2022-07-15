@@ -21,18 +21,27 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
         additionalInstructions: '',
         icon: ''
     })
-
+    const [medicineUnit, setMedicineUnit] = useState<string>('pill(s)')
     const [frequencyNum, setFrequencyNum] = useState<number>(0)
     const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
 
-    const handleFrequency = () => {
+
+    const handleSubmit = () => {
         let multiplier: number;
         frequencyUnits === 'hour' ? multiplier = 60 :
             frequencyUnits === 'day' ? multiplier = 1440 : multiplier = 10080
 
+        let doseNum: number = formData.totalDoses / parseInt(formData.dose)
+        let formatDoseWithUnit = `${formData.dose} ${medicineUnit}`
+        console.log(formatDoseWithUnit)
+        console.log(Math.floor(doseNum))
+        console.log(medicineUnit)
+
         setFormData({
             ...formData,
-            frequencyInMin: frequencyNum * multiplier
+            frequencyInMin: frequencyNum * multiplier,
+            dosesRemaining: Math.floor(doseNum),
+            dose: formatDoseWithUnit
         })
     }
 
@@ -90,12 +99,12 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                     name='dosage-num'
                     value={formData.dose} required
                 />
-                <select name="dosage-unit" className="form-tag">
-                    <option value="pills">pill(s)</option>
-                    <option value="mg">mg(s)</option>
-                    <option value="ml">ml(s)</option>
-                    <option value="puff">puff(s)</option>
-                    <option value="tsp">tsp(s)</option>
+                <select name="dosage-unit" className="form-tag" onChange={(e) => setMedicineUnit(e.target.value)}>
+                    <option value="pill(s)">pill(s)</option>
+                    <option value="mg(s)">mg(s)</option>
+                    <option value="ml(s)">ml(s)</option>
+                    <option value="puff(s)">puff(s)</option>
+                    <option value="tsp(s)">tsp(s)</option>
                 </select>
                 <br />
 
@@ -236,7 +245,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                     <br />
                 </div>
             </div>
-            <button onClick={() => handleFrequency()}>Submit</button>
+            <button onClick={() => handleSubmit()}>Submit</button>
         </div>
     )
 }
