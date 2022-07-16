@@ -4,12 +4,12 @@ import { MutationRx } from '../../interfaces'
 import './SubmissionForm.css'
 
 type MedProps = {
-    chosenMedicine: string
+    chosenMedicine: string,
+    userId: number
 }
 
-const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
+const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userId }) => {
     const [formData, setFormData] = useState<MutationRx>({
-        id: 0,
         medName: chosenMedicine,
         timeOfLastDose: '',
         timeOfNextDose: '',
@@ -19,12 +19,13 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
         dose: '',
         userInstructions: [],
         additionalInstructions: '',
-        icon: ''
+        icon: '',
+        userId: userId,
     })
     const [medicineUnit, setMedicineUnit] = useState<string>('pill(s)')
     const [frequencyNum, setFrequencyNum] = useState<number>(0)
     const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
-
+    console.log(formData)
 
     const handleSubmit = () => {
         let multiplier: number;

@@ -6,7 +6,6 @@ export interface User {
 
 
 export interface MutationRx {
-    id: number,
     medName: string,
     timeOfLastDose: string,
     timeOfNextDose: string,
@@ -17,6 +16,7 @@ export interface MutationRx {
     userInstructions: Array<string>,
     additionalInstructions: string,
     icon: string
+    userId: number,
 }
 
 export interface QueryRx {

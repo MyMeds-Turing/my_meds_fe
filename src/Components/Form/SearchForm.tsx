@@ -44,7 +44,7 @@ const SearchForm: React.FC<UserProps> = ({ userID }) => {
         {searchResults}
       </div>}
       {!showSubmissionForm && <button onClick={() => setShowSubmissionForm(true)}>Continue</button>}
-      {showSubmissionForm && <SubmissionForm chosenMedicine={chosenMedicine} />}
+      {showSubmissionForm && <SubmissionForm chosenMedicine={chosenMedicine} userId={userID} />}
     </div>
   );
 }
