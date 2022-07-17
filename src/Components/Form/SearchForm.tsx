@@ -7,6 +7,7 @@ type UserProps = {
 }
 
 const SearchForm: React.FC<UserProps> = ({ userID }) => {
+  console.log(userID)
   const [chosenMedicine, setChosenMedicine] = useState<string>('')
   const [allMeds, setAllMeds] = useState<Array<string>>([])
   const [displayResults, setDisplayResults] = useState<boolean>(false)
@@ -44,7 +45,7 @@ const SearchForm: React.FC<UserProps> = ({ userID }) => {
         {searchResults}
       </div>}
       {!showSubmissionForm && <button onClick={() => setShowSubmissionForm(true)}>Continue</button>}
-      {showSubmissionForm && <SubmissionForm chosenMedicine={chosenMedicine} userId={userID} />}
+      {showSubmissionForm && <SubmissionForm chosenMedicine={chosenMedicine} userID={userID} />}
     </div>
   );
 }

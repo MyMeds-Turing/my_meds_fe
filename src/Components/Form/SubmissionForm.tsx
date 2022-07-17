@@ -2,13 +2,15 @@ import React, { ChangeEvent, useState } from "react";
 import Graphic from "../Graphic/Graphic";
 import { MutationRx } from '../../interfaces'
 import './SubmissionForm.css'
+import { ADD_RX } from '../../GraphQL/Mutations'
+import { useMutation } from "@apollo/client";
 
 type MedProps = {
     chosenMedicine: string,
-    userId: number
+    userID: number
 }
 
-const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userId }) => {
+const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
     const [formData, setFormData] = useState<MutationRx>({
         medName: chosenMedicine,
         timeOfLastDose: '',
@@ -20,11 +22,12 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userId }) => {
         userInstructions: [],
         additionalInstructions: '',
         icon: '',
-        userId: userId,
+        userId: userID,
     })
     const [medicineUnit, setMedicineUnit] = useState<string>('pill(s)')
     const [frequencyNum, setFrequencyNum] = useState<number>(0)
     const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
+    const [postMed] = useMutation(ADD_RX)
     console.log(formData)
 
     const handleSubmit = () => {
@@ -44,6 +47,13 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userId }) => {
             dosesRemaining: Math.floor(doseNum),
             dose: formatDoseWithUnit
         })
+
+        postMed({
+            variables: {
+                input: formData
+            }
+        })
+
     }
 
     const handleCheckBoxes = (instruction: string) => {
