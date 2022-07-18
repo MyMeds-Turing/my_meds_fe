@@ -14,7 +14,8 @@ import { useQuery } from "@apollo/client";
 const App = () => {
   const [user, setUser] = useState<User>()
   const [meds, setMeds] = useState<QueryRx[]>([])
-  const { loading, error, data } = useQuery(GET_USER)
+  const { loading, error, data, refetch } = useQuery(GET_USER)
+
 
   useEffect(() => {
     if (data) {
@@ -33,11 +34,18 @@ const App = () => {
     return <h1>SOMETHING WENT WRONG...</h1>
   }
 
+  const updateData = () => {
+    if (data) {
+      setUser(data.fetchUser);
+      setMeds(data.fetchUserRxs)
+    }
+  }
+
   return (
     <div className="App">
       {user ? <Nav name={user.fullName} /> : <Nav name={'No user found'} />}
       <Route exact path='/add-new'>
-        {user ? <SearchForm userID={meds[0].userId} /> : <SearchForm userID={0} />}
+        {user ? <SearchForm userID={meds[0].userId} refetch={refetch} /> : <SearchForm userID={0} refetch={refetch} />}
       </Route>
       <Route exact path="/"><Dashboard meds={meds} /></Route>
     </div>
