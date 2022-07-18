@@ -10,9 +10,10 @@ import { Link } from "react-router-dom";
 type MedProps = {
     chosenMedicine: string,
     userID: number
+    refetch: any
 }
 
-const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
+const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch }) => {
     const [doseObject, setDoseObject] = useState<doseInfo>({ amt: '', unit: 'pill(s)' })
 
     const [formData, setFormData] = useState<MutationRx>({
@@ -30,6 +31,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
     const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
     const [postMed] = useMutation(ADD_RX)
 
+
     console.log(formData)
 
     const handleSubmit = () => {
@@ -45,7 +47,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
         })
 
         setModal(true)
-        
+
     }
 
     const handleCheckBoxes = (instruction: string) => {
@@ -79,13 +81,16 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
     }
 
     const handleMutation = () => {
-            postMed({
+        postMed({
             variables: {
                 userInput: formData
             }
         })
-
+        refetch()
     }
+
+
+
 
     return (
         <div className='form-inputs'>
@@ -110,13 +115,13 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
 
             </div>
             <div className="dosage-section">
-     
+
                 <input
                     className="dosage-num"
                     type='number'
                     placeholder='0'
                     min='0'
-                    onChange={(e) =>  handleDoseUpdate('amt', e.target.value) }
+                    onChange={(e) => handleDoseUpdate('amt', e.target.value)}
                 />
                 <select name="dosage-unit" className="form-tag" onChange={(e) => handleDoseUpdate('unit', e.target.value)}>
                     <option value="pill(s)">pill(s)</option>
@@ -275,7 +280,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
                     <div className="modal-buttons-box">
                         <button onClick={() => setModal(false)}>Edit</button>
                         <Link to="/">
-                             <button onClick={() => handleMutation()}>Confirm</button>
+                            <button onClick={() => handleMutation()}>Confirm</button>
                         </Link>
                     </div>
                 </div>

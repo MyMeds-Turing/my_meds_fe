@@ -4,9 +4,10 @@ import SubmissionForm from './SubmissionForm'
 
 type UserProps = {
   userID: number
+  refetch: any
 }
 
-const SearchForm: React.FC<UserProps> = ({ userID }) => {
+const SearchForm: React.FC<UserProps> = ({ userID, refetch }) => {
   console.log(userID)
   const [chosenMedicine, setChosenMedicine] = useState<string>('')
   const [allMeds, setAllMeds] = useState<Array<string>>([])
@@ -45,7 +46,7 @@ const SearchForm: React.FC<UserProps> = ({ userID }) => {
         {searchResults}
       </div>}
       {!showSubmissionForm && <button onClick={() => setShowSubmissionForm(true)}>Continue</button>}
-      {showSubmissionForm && <SubmissionForm chosenMedicine={chosenMedicine} userID={userID} />}
+      {showSubmissionForm && <SubmissionForm chosenMedicine={chosenMedicine} userID={userID} refetch={refetch} />}
     </div>
   );
 }
