@@ -13,17 +13,15 @@ type MedProps = {
 const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
     const [formData, setFormData] = useState<MutationRx>({
         medName: chosenMedicine,
-        timeOfLastDose: "2022-07-18T01:37:51Z",
-        timeOfNextDose: "2022-07-19T01:37:51Z",
         timeBetweenDose: 0,
         totalDoses: 0,
-        dosesRemaining: 0,
         dose: '',
         userInstructions: "",
         additionalInstructions: '',
         icon: '',
         userId: userID,
     })
+    const [doseAmount, setDoseAmount] = useState<string>('')
     const [medicineUnit, setMedicineUnit] = useState<string>('pill(s)')
     const [frequencyNum, setFrequencyNum] = useState<number>(0)
     const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
@@ -35,20 +33,16 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
         frequencyUnits === 'hour' ? multiplier = 60 :
             frequencyUnits === 'day' ? multiplier = 1440 : multiplier = 10080
 
-        let formatDoseWithUnit = `${formData.dose} ${medicineUnit}`
-        console.log(formatDoseWithUnit)
-        console.log(medicineUnit)
-
         // let formatUserInstructions = formData.userInstructions.join(', ')
 
         setFormData({
             ...formData,
             timeBetweenDose: frequencyNum * multiplier,
-            dosesRemaining: formData.totalDoses,
-            dose: formatDoseWithUnit,
+            dose: `${doseAmount} ${medicineUnit}`,
             userInstructions: formData.userInstructions
         })
-
+        
+        console.log(formData)
         postMed({
             variables: {
                 userInput: formData
@@ -77,7 +71,6 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
         setFormData({ ...formData, [field]: userInput })
     }
 
-    console.log(formData)
 
     return (
         <div className='form-inputs'>
@@ -104,14 +97,14 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
             <div className="dosage-section">
                 <label htmlFor="dosage-num">Single Dose :</label>
                 <input
-                    onChange={(event) => { handleChange('dose', event.target.value) }}
+                    onChange={(event) => { setDoseAmount(event.target.value) }}
                     className="dosage-num"
                     type='number'
                     placeholder='0'
                     min='0'
                     step='any'
                     name='dosage-num'
-                    value={formData.dose} required
+                    value={doseAmount} required
                 />
                 <select name="dosage-unit" className="form-tag" onChange={(e) => setMedicineUnit(e.target.value)}>
                     <option value="pill(s)">pill(s)</option>

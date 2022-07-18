@@ -7,11 +7,8 @@ export interface User {
 
 export interface MutationRx {
     medName: string,
-    timeOfLastDose: string,
-    timeOfNextDose: string,
     timeBetweenDose: number,
     totalDoses: number,
-    dosesRemaining: number,
     dose: string,
     userInstructions: string,
     additionalInstructions: string,
