@@ -58,18 +58,19 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
     }
 
     const handleCheckBoxes = (instruction: string) => {
-        let addInstructions = formData.userInstructions += instruction
-        if (!formData.userInstructions.includes(instruction)) {
-            setFormData({
-                ...formData,
-                userInstructions: addInstructions
-            })
+        
+        let addInstructions = formData.userInstructions
+        console.log('addinstructions' , addInstructions.split(', '));
+        if (!addInstructions.split(', ').includes(instruction)) {
+            addInstructions += instruction + ', '
         } else {
-            // setFormData({
-            //     ...formData,
-            //     userInstructions: formData.userInstructions.filter(ins => ins !== instruction)
-            // })
+           addInstructions = addInstructions.split(', ').filter(ins => ins !== instruction).join(', ')
         }
+        
+        setFormData({
+            ...formData,
+            userInstructions: addInstructions
+        })        
     };
 
     const handleChange = (field: string, userInput: string | number) => {
@@ -166,38 +167,38 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="no_alcohol"
+                            value="No Alcohol"
                             onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'noAlcohol'} />
                         No Alcohol
                         <br />
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="may_induce_drowziness"
+                            value="May Induce Drowziness"
                             onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'mayInduceDrowziness'} />May Induce Drowziness
                         <br />
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="take_with_food"
+                            value="Take With Food"
                             onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'takeWithFood'} />Take With Food
                         <br />
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="no_heavy_machinery"
+                            value="No Heavy Machinery"
                             onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'noHeavyMachinery'} />No Heavy Machinery
                         <br />
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="take_in_the_morning"
+                            value="Take in the Morning"
                             onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />Take in the Morning
                         <br />
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="take_in_the_evening"
+                            value="Take in the Evening"
                             onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheEvening'} />Take in the Evening
                         <br />
                     </div>
