@@ -27,10 +27,12 @@ const MedReminder: React.FC<MedProps> = ({ med }) => {
         <div className="med-box">
             <div className="med-reminder">
                 <div className="med-name-container">
-                    <h3 className="med-name">{med.medName}</h3>
+                    <h2>Take {med.dose} : </h2>
+                    <h2 className="med-name">{med.medName}</h2>
                     <img className={`warning-icon ${showWarning}`} src={warningSign} onMouseEnter={() => setRefillHover('')} onMouseLeave={() => setRefillHover('hidden')} />
+                    
                 </div>
-                <p>Take {med.dose}</p>
+               
                 <p>Next Dose: {formatDay} at {formatDate.substring(10)}</p>
                 <CountdownTimer targetDate={timeDiff} />
                 <div className="med-button-info-box">
