@@ -4,6 +4,8 @@ import { MutationRx, doseInfo } from '../../interfaces'
 import './SubmissionForm.css'
 import { ADD_RX } from '../../GraphQL/Mutations'
 import { useMutation } from "@apollo/client";
+import './SubmissionForm.css'
+import { Link } from "react-router-dom";
 
 type MedProps = {
     chosenMedicine: string,
@@ -23,7 +25,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
         icon: '',
         userId: userID,
     })
-    
+    const [modal, setModal] = useState<boolean>(false)
     const [frequencyNum, setFrequencyNum] = useState<number>(0)
     const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
     const [postMed] = useMutation(ADD_RX)
@@ -34,17 +36,16 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
         let multiplier: number;
         frequencyUnits === 'hour' ? multiplier = 60 :
             frequencyUnits === 'day' ? multiplier = 1440 : multiplier = 10080
+
         setFormData({
             ...formData,
             timeBetweenDose: frequencyNum * multiplier,
-            userInstructions: formData.userInstructions
-        })
-        postMed({
-            variables: {
-                userInput: formData
-            }
+            // userInstructions: formData.userInstructions,
+            dose: `${doseObject.amt} ${doseObject.unit}`
         })
 
+        setModal(true)
+        
     }
 
     const handleCheckBoxes = (instruction: string) => {
@@ -70,12 +71,21 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
     //on change of EITHER dose amount or dose unit, we want to update formData.dose with the concatented version
 
     const handleDoseUpdate = (field: string, userInput: string) => {
+        console.log(userInput)
         setDoseObject({ ...doseObject, [field]: userInput })
-
-        setFormData({ ...formData, dose: `${doseObject.amt} ${doseObject.unit}` })
         console.log('doseObject onChange event', doseObject, 'formData.dose on doseObject change', formData.dose)
+
+        // setFormData({ ...formData, dose: `${doseObject.amt} ${doseObject.unit}` })
     }
 
+    const handleMutation = () => {
+            postMed({
+            variables: {
+                userInput: formData
+            }
+        })
+
+    }
 
     return (
         <div className='form-inputs'>
@@ -100,16 +110,13 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
 
             </div>
             <div className="dosage-section">
-                <label htmlFor="dosage-num">Single Dose :</label>
+     
                 <input
-                    onChange={(e) => { handleDoseUpdate('amt', e.target.value) }}
                     className="dosage-num"
                     type='number'
                     placeholder='0'
                     min='0'
-                    step='any'
-                    name='dosage-num'
-                    value={doseObject.amt} required
+                    onChange={(e) =>  handleDoseUpdate('amt', e.target.value) }
                 />
                 <select name="dosage-unit" className="form-tag" onChange={(e) => handleDoseUpdate('unit', e.target.value)}>
                     <option value="pill(s)">pill(s)</option>
@@ -258,6 +265,21 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
                 </div>
             </div>
             <button onClick={() => handleSubmit()}>Submit</button>
+            {modal && <div className="modal" onClick={() => setModal(false)}>
+                <div className="modal-confirm">
+                    <h4>Please confirm:</h4>
+                    <p>{chosenMedicine}</p>
+                    <p>{formData.dose}</p>
+                    <p>Addn'l Instructions: {formData.userInstructions}</p>
+                    <p>{formData.additionalInstructions}</p>
+                    <div className="modal-buttons-box">
+                        <button onClick={() => setModal(false)}>Edit</button>
+                        <Link to="/">
+                             <button onClick={() => handleMutation()}>Confirm</button>
+                        </Link>
+                    </div>
+                </div>
+            </div>}
         </div>
     )
 }
