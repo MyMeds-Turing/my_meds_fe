@@ -28,3 +28,8 @@ export interface QueryRx {
     totalDoses: number,
     userId: number,
 }
+
+export interface doseInfo {
+    amt: string,
+    unit: string
+}

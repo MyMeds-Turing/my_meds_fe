@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import Graphic from "../Graphic/Graphic";
-import { MutationRx } from '../../interfaces'
+import { MutationRx, doseInfo } from '../../interfaces'
 import './SubmissionForm.css'
 import { ADD_RX } from '../../GraphQL/Mutations'
 import { useMutation } from "@apollo/client";
@@ -11,6 +11,8 @@ type MedProps = {
 }
 
 const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
+    const [doseObject, setDoseObject] = useState<doseInfo>({ amt: '', unit: 'pill(s)' })
+
     const [formData, setFormData] = useState<MutationRx>({
         medName: chosenMedicine,
         timeBetweenDose: 0,
@@ -21,54 +23,57 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
         icon: '',
         userId: userID,
     })
-    const [doseAmount, setDoseAmount] = useState<string>('')
-    const [medicineUnit, setMedicineUnit] = useState<string>('pill(s)')
+    
     const [frequencyNum, setFrequencyNum] = useState<number>(0)
     const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
     const [postMed] = useMutation(ADD_RX)
+
     console.log(formData)
 
     const handleSubmit = () => {
         let multiplier: number;
         frequencyUnits === 'hour' ? multiplier = 60 :
             frequencyUnits === 'day' ? multiplier = 1440 : multiplier = 10080
-
-        // let formatUserInstructions = formData.userInstructions.join(', ')
-
         setFormData({
             ...formData,
             timeBetweenDose: frequencyNum * multiplier,
-            dose: `${doseAmount} ${medicineUnit}`,
             userInstructions: formData.userInstructions
         })
-        
-        console.log(formData)
         postMed({
             variables: {
                 userInput: formData
             }
         })
-        // postMed()
+
     }
 
     const handleCheckBoxes = (instruction: string) => {
-        
+
         let addInstructions = formData.userInstructions
-        console.log('addinstructions' , addInstructions.split(', '));
+        console.log('addinstructions', addInstructions.split(', '));
         if (!addInstructions.split(', ').includes(instruction)) {
             addInstructions += instruction + ', '
         } else {
-           addInstructions = addInstructions.split(', ').filter(ins => ins !== instruction).join(', ')
+            addInstructions = addInstructions.split(', ').filter(ins => ins !== instruction).join(', ')
         }
-        
+
         setFormData({
             ...formData,
             userInstructions: addInstructions
-        })        
+        })
     };
 
     const handleChange = (field: string, userInput: string | number) => {
         setFormData({ ...formData, [field]: userInput })
+    }
+
+    //on change of EITHER dose amount or dose unit, we want to update formData.dose with the concatented version
+
+    const handleDoseUpdate = (field: string, userInput: string) => {
+        setDoseObject({ ...doseObject, [field]: userInput })
+
+        setFormData({ ...formData, dose: `${doseObject.amt} ${doseObject.unit}` })
+        console.log('doseObject onChange event', doseObject, 'formData.dose on doseObject change', formData.dose)
     }
 
 
@@ -97,16 +102,16 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
             <div className="dosage-section">
                 <label htmlFor="dosage-num">Single Dose :</label>
                 <input
-                    onChange={(event) => { setDoseAmount(event.target.value) }}
+                    onChange={(e) => { handleDoseUpdate('amt', e.target.value) }}
                     className="dosage-num"
                     type='number'
                     placeholder='0'
                     min='0'
                     step='any'
                     name='dosage-num'
-                    value={doseAmount} required
+                    value={doseObject.amt} required
                 />
-                <select name="dosage-unit" className="form-tag" onChange={(e) => setMedicineUnit(e.target.value)}>
+                <select name="dosage-unit" className="form-tag" onChange={(e) => handleDoseUpdate('unit', e.target.value)}>
                     <option value="pill(s)">pill(s)</option>
                     <option value="mg(s)">mg(s)</option>
                     <option value="ml(s)">ml(s)</option>
