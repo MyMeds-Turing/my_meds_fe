@@ -2,9 +2,20 @@
     margin: 1%
 }
 
+.med-name-container {
+    display: flex;
+}
+
 .med-name {
     font-size: 30px;
     margin-bottom: -1vh;
+}
+
+.warning-icon {
+    padding-top: .6vh;
+    padding-left: 2vh;
+    height: 3vh;
+    width: 2vw;
 }
 
 .med-box {
@@ -24,7 +35,7 @@
     justify-content: space-evenly;
 }
 
-.med-button-info-box{
+.med-button-info-box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,11 +54,18 @@
     margin-top: 7vh;
 }
 
-.med-info-hover{
+.refill {
+    background-color: rgb(224, 181, 24);
+}
+
+.med-info-hover {
     margin-left: 1vw;
 }
 
-.med-info-hover:hover{
+.warning-icon:hover {
     cursor: pointer;
 }
 
+.med-info-hover:hover {
+    cursor: pointer;
+}

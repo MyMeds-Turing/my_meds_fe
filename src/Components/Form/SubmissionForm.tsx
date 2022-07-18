@@ -1,53 +1,76 @@
 import React, { ChangeEvent, useState } from "react";
 import Graphic from "../Graphic/Graphic";
-import { Prescription } from '../../interfaces'
+import { MutationRx } from '../../interfaces'
 import './SubmissionForm.css'
+import { ADD_RX } from '../../GraphQL/Mutations'
+import { useMutation } from "@apollo/client";
 
 type MedProps = {
-    chosenMedicine: string
+    chosenMedicine: string,
+    userID: number
 }
 
-const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
-    const [formData, setFormData] = useState<Prescription>({
-        id: 0,
+const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
+    const [formData, setFormData] = useState<MutationRx>({
         medName: chosenMedicine,
-        timeOfLastDose: '',
-        timeOfNextDose: '',
-        frequencyInMin: 0,
+        timeOfLastDose: "2022-07-18T01:37:51Z",
+        timeOfNextDose: "2022-07-19T01:37:51Z",
+        timeBetweenDose: 0,
         totalDoses: 0,
         dosesRemaining: 0,
         dose: '',
-        userInstructions: [],
+        userInstructions: "",
         additionalInstructions: '',
-        icon: ''
+        icon: '',
+        userId: userID,
     })
-
+    const [medicineUnit, setMedicineUnit] = useState<string>('pill(s)')
     const [frequencyNum, setFrequencyNum] = useState<number>(0)
     const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
+    const [postMed] = useMutation(ADD_RX)
+    console.log(formData)
 
-    const handleFrequency = () => {
+    const handleSubmit = () => {
         let multiplier: number;
         frequencyUnits === 'hour' ? multiplier = 60 :
             frequencyUnits === 'day' ? multiplier = 1440 : multiplier = 10080
 
+        let formatDoseWithUnit = `${formData.dose} ${medicineUnit}`
+        console.log(formatDoseWithUnit)
+        console.log(medicineUnit)
+
+        // let formatUserInstructions = formData.userInstructions.join(', ')
+
         setFormData({
             ...formData,
-            frequencyInMin: frequencyNum * multiplier
+            timeBetweenDose: frequencyNum * multiplier,
+            dosesRemaining: formData.totalDoses,
+            dose: formatDoseWithUnit,
+            userInstructions: formData.userInstructions
         })
+
+        postMed({
+            variables: {
+                userInput: formData
+            }
+        })
+        // postMed()
     }
 
     const handleCheckBoxes = (instruction: string) => {
-        if (!formData.userInstructions.includes(instruction)) {
-            setFormData({
-                ...formData,
-                userInstructions: [...formData.userInstructions, instruction]
-            })
+        
+        let addInstructions = formData.userInstructions
+        console.log('addinstructions' , addInstructions.split(', '));
+        if (!addInstructions.split(', ').includes(instruction)) {
+            addInstructions += instruction + ', '
         } else {
-            setFormData({
-                ...formData,
-                userInstructions: formData.userInstructions.filter(ins => ins !== instruction)
-            })
+           addInstructions = addInstructions.split(', ').filter(ins => ins !== instruction).join(', ')
         }
+        
+        setFormData({
+            ...formData,
+            userInstructions: addInstructions
+        })        
     };
 
     const handleChange = (field: string, userInput: string | number) => {
@@ -79,17 +102,35 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
 
             </div>
             <div className="dosage-section">
-                <label htmlFor="dosage-num">Dosage: </label>
+                <label htmlFor="dosage-num">Single Dose :</label>
                 <input
                     onChange={(event) => { handleChange('dose', event.target.value) }}
                     className="dosage-num"
-                    type='text'
-                    placeholder='Ex. 10mg'
+                    type='number'
+                    placeholder='0'
+                    min='0'
+                    step='any'
                     name='dosage-num'
                     value={formData.dose} required
                 />
+                <select name="dosage-unit" className="form-tag" onChange={(e) => setMedicineUnit(e.target.value)}>
+                    <option value="pill(s)">pill(s)</option>
+                    <option value="mg(s)">mg(s)</option>
+                    <option value="ml(s)">ml(s)</option>
+                    <option value="puff(s)">puff(s)</option>
+                    <option value="tsp(s)">tsp(s)</option>
+                </select>
                 <br />
-                <label htmlFor="doses-remaining">Remaining Doses: </label>
+
+                {/* 
+                Create separate state for dosage unit, use to interpolate into Total Prescription input?
+                Split dosage input into number and unit dropdown
+                Assumption is that user is filling this out with brand new/full prescription
+                Use unit from dosage input to ask user total amount of units listed in Rx ex. Quantity 30 pills, 500ml
+                Handle change for total doses to make calculation of what dose total is in prescription(dose number divided by total)
+
+                 */}
+                {/* <label htmlFor="doses-remaining">Remaining Doses: </label>
                 <input
                     onChange={(event) => { handleChange('dosesRemaining', parseInt(event.target.value)) }}
                     className="doses-remaining"
@@ -98,9 +139,16 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                     min='0'
                     name='doses-remaining'
                     value={formData.dosesRemaining} required
-                />
+                /> */}
+
+
+                {/* Feedback on ambiguous fields, for MVP just refactor Total Doses field to be more user friendly/informative 
+                
+                
+                */}
+
                 <br />
-                <label htmlFor="doses-total">Total Doses: </label>
+                <label htmlFor="doses-total">Total Quantity: </label>
                 <input
                     onChange={(event) => { handleChange('totalDoses', parseInt(event.target.value)) }}
                     className="doses-total"
@@ -119,38 +167,38 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="no_alcohol"
+                            value="No Alcohol"
                             onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'noAlcohol'} />
                         No Alcohol
                         <br />
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="may_induce_drowziness"
+                            value="May Induce Drowziness"
                             onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'mayInduceDrowziness'} />May Induce Drowziness
                         <br />
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="take_with_food"
+                            value="Take With Food"
                             onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'takeWithFood'} />Take With Food
                         <br />
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="no_heavy_machinery"
+                            value="No Heavy Machinery"
                             onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'noHeavyMachinery'} />No Heavy Machinery
                         <br />
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="take_in_the_morning"
+                            value="Take in the Morning"
                             onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />Take in the Morning
                         <br />
                         <input
                             type="checkbox"
                             name="reminder"
-                            value="take_in_the_evening"
+                            value="Take in the Evening"
                             onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheEvening'} />Take in the Evening
                         <br />
                     </div>
@@ -211,7 +259,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine }) => {
                     <br />
                 </div>
             </div>
-            <button onClick={() => handleFrequency()}>Submit</button>
+            <button onClick={() => handleSubmit()}>Submit</button>
         </div>
     )
 }
