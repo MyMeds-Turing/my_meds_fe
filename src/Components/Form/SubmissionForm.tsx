@@ -13,13 +13,13 @@ type MedProps = {
 const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
     const [formData, setFormData] = useState<MutationRx>({
         medName: chosenMedicine,
-        timeOfLastDose: '',
-        timeOfNextDose: '',
-        frequencyInMin: 0,
+        timeOfLastDose: "2022-07-18T01:37:51Z",
+        timeOfNextDose: "2022-07-19T01:37:51Z",
+        timeBetweenDose: 0,
         totalDoses: 0,
         dosesRemaining: 0,
         dose: '',
-        userInstructions: [],
+        userInstructions: "",
         additionalInstructions: '',
         icon: '',
         userId: userID,
@@ -35,38 +35,40 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID }) => {
         frequencyUnits === 'hour' ? multiplier = 60 :
             frequencyUnits === 'day' ? multiplier = 1440 : multiplier = 10080
 
-        let doseNum: number = formData.totalDoses / parseInt(formData.dose)
         let formatDoseWithUnit = `${formData.dose} ${medicineUnit}`
         console.log(formatDoseWithUnit)
-        console.log(Math.floor(doseNum))
         console.log(medicineUnit)
+
+        // let formatUserInstructions = formData.userInstructions.join(', ')
 
         setFormData({
             ...formData,
-            frequencyInMin: frequencyNum * multiplier,
-            dosesRemaining: Math.floor(doseNum),
-            dose: formatDoseWithUnit
+            timeBetweenDose: frequencyNum * multiplier,
+            dosesRemaining: formData.totalDoses,
+            dose: formatDoseWithUnit,
+            userInstructions: formData.userInstructions
         })
 
         postMed({
             variables: {
-                input: formData
+                userInput: formData
             }
         })
-
+        // postMed()
     }
 
     const handleCheckBoxes = (instruction: string) => {
+        let addInstructions = formData.userInstructions += instruction
         if (!formData.userInstructions.includes(instruction)) {
             setFormData({
                 ...formData,
-                userInstructions: [...formData.userInstructions, instruction]
+                userInstructions: addInstructions
             })
         } else {
-            setFormData({
-                ...formData,
-                userInstructions: formData.userInstructions.filter(ins => ins !== instruction)
-            })
+            // setFormData({
+            //     ...formData,
+            //     userInstructions: formData.userInstructions.filter(ins => ins !== instruction)
+            // })
         }
     };
 

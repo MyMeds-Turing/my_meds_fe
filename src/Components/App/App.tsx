@@ -29,6 +29,7 @@ const App = () => {
   }
 
   if (error) {
+    console.log(error)
     return <h1>SOMETHING WENT WRONG...</h1>
   }
 
@@ -36,7 +37,7 @@ const App = () => {
     <div className="App">
       {user ? <Nav name={user.fullName} /> : <Nav name={'No user found'} />}
       <Route exact path='/add-new'>
-        {user ? <SearchForm userID={user.id} /> : <SearchForm userID={0} />}
+        {user ? <SearchForm userID={meds[0].userId} /> : <SearchForm userID={0} />}
       </Route>
       <Route exact path="/"><Dashboard meds={meds} /></Route>
     </div>

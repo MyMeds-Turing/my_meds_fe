@@ -2,13 +2,27 @@ import { gql } from "@apollo/client";
 import { MutationRx } from '../interfaces'
 
 export const ADD_RX = gql`
-                        
-mutation whatever($input: UpdateRxInput!) {
-    updateRx(input: $input) {
-        medName
+    mutation addRx($userInput: RxInput!){ 
+        addRx(input: {
+            params: $userInput
+        }){
+            rx {
+                id
+            }
+        }
     }
-}
 `
+
+
+
+// export const ADD_RX = gql`
+                        
+// mutation whatever($input: UpdateRxInput!) {
+//     updateRx(input: $input) {
+//         medName
+//     }
+// }
+// `
 //things ive learned:
 
 //mutation whatever($input: UpdateRxInput!) {

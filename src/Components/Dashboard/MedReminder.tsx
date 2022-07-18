@@ -44,7 +44,7 @@ const MedReminder: React.FC<MedProps> = ({ med }) => {
                 <p>Remaining Doses: {med.dosesRemaining}</p>
             </div>
             <div className={`med-info-box refill ${refillHover}`}>
-                <p>{`You have ${med.dosesRemaining}. Please consider refilling your medicine`}</p>
+                <p>{`You have ${med.dosesRemaining} doses remaining. Please consider refilling your medicine`}</p>
             </div>
         </div>
     )

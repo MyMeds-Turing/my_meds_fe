@@ -9,11 +9,11 @@ export interface MutationRx {
     medName: string,
     timeOfLastDose: string,
     timeOfNextDose: string,
-    frequencyInMin: number,
+    timeBetweenDose: number,
     totalDoses: number,
     dosesRemaining: number,
     dose: string,
-    userInstructions: Array<string>,
+    userInstructions: string,
     additionalInstructions: string,
     icon: string
     userId: number,
@@ -28,5 +28,6 @@ export interface QueryRx {
     additionalInstructions: string,
     dosesRemaining: number,
     icon: string,
-    totalDoses: number
+    totalDoses: number,
+    userId: number,
 }
