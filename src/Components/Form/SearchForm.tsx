@@ -45,7 +45,7 @@ const SearchForm: React.FC<UserProps> = ({ userID, refetch }) => {
       {displayResults && <div className='form__live-search-results-box'>
         {searchResults}
       </div>}
-      {!showSubmissionForm && <button onClick={() => setShowSubmissionForm(true)}>Continue</button>}
+      {!showSubmissionForm && <button className="continue" onClick={() => setShowSubmissionForm(true)}>Continue</button>}
       {showSubmissionForm && <SubmissionForm chosenMedicine={chosenMedicine} userID={userID} refetch={refetch} />}
     </div>
   );

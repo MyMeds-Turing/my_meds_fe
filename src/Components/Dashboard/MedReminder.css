@@ -1,14 +1,19 @@
-* {
+.med-name-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     margin: 1%
 }
 
-.med-name-container {
-    display: flex;
+.med-name-container>img {
+    padding: 2px;
 }
 
 .med-name {
-    font-size: 30px;
-    margin-bottom: -1vh;
+    font-size: 20px;
 }
 
 .warning-icon {
@@ -26,7 +31,7 @@
 .med-reminder {
     border: 2px solid cornflowerblue;
     border-radius: 10px;
-    width: 50vw;
+    width: 75vw;
     height: 35vh;
     margin: 1%;
     display: flex;
@@ -52,6 +57,7 @@
     height: 22vh;
     background-color: rgb(136, 200, 241);
     margin-top: 7vh;
+    overflow-y: scroll;
 }
 
 .refill {
@@ -68,4 +74,42 @@
 
 .med-info-hover:hover {
     cursor: pointer;
+}
+
+.next-dose {
+    font-size: large;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 500px) {
+
+    .med-name {
+        font-size: 20px;
+        margin-bottom: -1vh;
+        overflow-wrap: auto;
+
+    }
+
+    .med-name-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .med-reminder {
+        height: auto;
+
+    }
+
+
+    .med-info-box {
+        width: 50vw;
+        height: 28vh;
+        overflow-y: scroll;
+    }
+
+
 }
