@@ -3,6 +3,7 @@ import { QueryRx } from '../../interfaces'
 import CountdownTimer from "../CountdownTimer/CountdownTimer";
 import './MedReminder.css'
 import warningSign from '../../Assets/icons/warningSign.png'
+import Graphic from '../Graphic/Graphic'
 
 type MedProps = {
     med: QueryRx,
@@ -13,7 +14,9 @@ type MedProps = {
 const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch }) => {
     const [infoHover, setInfoHover] = useState('hidden')
     const [refillHover, setRefillHover] = useState('hidden')
+
     const [modal, setModal] = useState(false)
+
 
     const showWarning = med.dosesRemaining > (med.totalDoses * .1) ? 'hidden' : ""
 
@@ -26,23 +29,29 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch }) => {
     const formatDay = parseInt(formatDate.substring(2, 4)) === timeNow.getDate() ? 'Today' :
         parseInt(formatDate.substring(2, 4)) === (timeNow.getDate() + 1) ? 'Tomorrow' : formatDate.substring(0, 8)
 
+
     return (
         <div className="med-box">
             <div className="med-reminder">
                 <div className="med-name-container">
-                    <h3 className="med-name">{med.medName}</h3>
+                    <Graphic tag={med.icon} />
+                    <h3 className="med-name">{med.dose} of {med.medName}</h3>
                     <img className={`warning-icon ${showWarning}`} src={warningSign} onMouseEnter={() => setRefillHover('')} onMouseLeave={() => setRefillHover('hidden')} />
                 </div>
-                <p>Take {med.dose}</p>
-                <p>Next Dose: {formatDay} at {formatDate.substring(10)}</p>
+                <p className="next-dose">Next Dose: {formatDay} at {formatDate.substring(10)}</p>
+                <div className="reminder-icons">
+
+                </div>
                 <CountdownTimer targetDate={timeDiff} />
                 <div className="med-button-info-box">
                     <button className="navButton">TAKE YOUR MEDS</button>
+
                     <button className='delete-RX' onClick={() => {
                         deleteRX(med.id)
                         setModal(true)
                         }}>Delete</button>
                     <p className="med-info-hover" onMouseEnter={() => setInfoHover('')} onMouseLeave={() => setInfoHover('hidden')}>ℹ️</p>
+
                 </div>
             </div>
             <div className={`med-info-box ${infoHover}`}>
