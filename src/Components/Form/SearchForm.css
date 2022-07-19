@@ -1,13 +1,14 @@
 .form__live-search-results-box {
-    border: 2px solid black;
-    width: 40vw;
+    border: 2px solid #457B9D;
+    border-radius: 7px;
+    width: 50vw;
     height: 30vh;
-    margin-left: 30vw;
+    /* margin-left: 30vw; */
     overflow-y: auto;
 }
 
 .form__search-result:hover {
-    background-color: aquamarine;
+    background-color: #A8DADC;
     cursor: pointer;
 }
 
@@ -16,5 +17,28 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    align-items: center;
     align-content: center;
+}
+
+.continue {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    color: black;
+    border: 1px solid white;
+    padding: 7px;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: #A8DADC;
+    cursor: pointer;
+    font-weight: 600;
+    width: 40vw;
+    min-width: 90px;
+
+}
+
+.continue:hover {
+    background-color: #1D3557;
+    color: white;
+    font-weight: 800;
 }

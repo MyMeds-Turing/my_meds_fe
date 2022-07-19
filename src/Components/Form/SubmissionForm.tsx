@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 type MedProps = {
     chosenMedicine: string,
-    userID: number
+    userID: any
     refetch: any
 }
 
@@ -24,7 +24,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
         userInstructions: "",
         additionalInstructions: '',
         icon: '',
-        userId: userID,
+        userId: parseInt(userID),
     })
     const [modal, setModal] = useState<boolean>(false)
     const [frequencyNum, setFrequencyNum] = useState<number>(0)
@@ -147,30 +147,42 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
 
                 <div className="reminders">
                     <div className="reminder-icon-section">
-                        <input
-                            type="checkbox"
-                            name="reminder"
-                            value="No Alcohol"
-                            onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'noAlcohol'} />
-                        No Alcohol
+                        <div className="checkbox-input">
+                            <input
+                                type="checkbox"
+                                name="reminder"
+                                value="Take in the Morning"
+                                onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />
+                            <p className="checkbox-label">Take in the Morning</p>
+                        </div>
+
                         <br />
-                        <input
-                            type="checkbox"
-                            name="reminder"
-                            value="May Induce Drowziness"
-                            onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'mayInduceDrowziness'} />May Induce Drowziness
+                        <div className="checkbox-input">
+                            <input
+                                type="checkbox"
+                                name="reminder"
+                                value="Take in the Evening"
+                                onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheEvening'} />
+                            <p className="checkbox-label">Take in the Evening</p>
+                        </div>
                         <br />
-                        <input
-                            type="checkbox"
-                            name="reminder"
-                            value="Take With Food"
-                            onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'takeWithFood'} />Take With Food
+                        <div className="checkbox-input">
+                            <input
+                                type="checkbox"
+                                name="reminder"
+                                value="Take With Food"
+                                onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'takeWithFood'} />
+                            <p className="checkbox-label">Take With Food</p>
+                        </div>
                         <br />
-                        <input
-                            type="checkbox"
-                            name="reminder"
-                            value="No Heavy Machinery"
-                            onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'noHeavyMachinery'} />No Heavy Machinery
+                        <div className="checkbox-input">
+                            <input
+                                type="checkbox"
+                                name="reminder"
+                                value="No Alcohol"
+                                onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'noAlcohol'} />
+                            <p className="checkbox-label">No Alcohol</p>
+                        </div>
                         <br />
                         <input
                             id="takeAM"
@@ -178,13 +190,27 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                             name="reminder"
                             value="Take in the Morning"
                             onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />Take in the Morning
+                        <div className="checkbox-input">
+                            <input
+                                type="checkbox"
+                                name="reminder"
+                                value="May Induce Drowziness"
+                                onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'mayInduceDrowziness'} />
+                            <p className="checkbox-label">May Induce Drowziness</p>
+                        </div>
+
                         <br />
-                        <input
-                            type="checkbox"
-                            name="reminder"
-                            value="Take in the Evening"
-                            onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheEvening'} />Take in the Evening
+                        <div className="checkbox-input">
+                            <input
+                                type="checkbox"
+                                name="reminder"
+                                value="No Heavy Machinery"
+                                onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'noHeavyMachinery'} />
+                            <p className="checkbox-label">No Heavy Machinery</p>
+                        </div>
+
                         <br />
+
                     </div>
 
                     <p>Additional Instructions:</p>
@@ -194,56 +220,97 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                         name="reminder"
                         onChange={(event) => handleChange('additionalInstructions', event.target.value)} />
                     <br />
+                    <label htmlFor="icon">Choose an icon</label>
+
                     <div className="icon-selector">
                         <label htmlFor="icon">Choose an icon : </label>
                         <br />
-                        <input
-                            type="radio"
-                            id="icon"
-                            name="icon"
-                            value="capsule"
-                            onChange={(event) => handleChange('icon', event.target.value)} />
-                        <Graphic tag={'capsule'} />
-                        <input
-                            type="radio"
-                            id="icon"
-                            name="icon"
-                            value="roundPill"
-                            onChange={(event) => handleChange('icon', event.target.value)} />
-                        <Graphic tag={'roundPill'} />
-                        <input
-                            type="radio"
-                            id="icon"
-                            name="icon"
-                            value="dropper"
-                            onChange={(event) => handleChange('icon', event.target.value)} />
-                        <Graphic tag={'dropper'} />
-                        <input
-                            type="radio"
-                            id="icon"
-                            name="icon"
-                            value="fourPack"
-                            onChange={(event) => handleChange('icon', event.target.value)} />
-                        <Graphic tag={'fourPack'} />
-                        <input
-                            type="radio"
-                            id="icon"
-                            name="icon"
-                            value="medicineBottle"
-                            onChange={(event) => handleChange('icon', event.target.value)} />
-                        <Graphic tag={'medicineBottle'} />
-                        <input
-                            type="radio"
-                            id="icon"
-                            name="icon"
-                            value="paste"
-                            onChange={(event) => handleChange('icon', event.target.value)} />
-                        <Graphic tag={'paste'} />
+                        <div className="med-graphic-option">
+                            <input
+                                type="radio"
+                                id="icon"
+                                name="icon"
+                                value="capsule"
+                                onChange={(event) => handleChange('icon', event.target.value)} />
+                            <Graphic tag={'capsule'} />
+                        </div>
+                        <div className="med-graphic-option">
+                            <input
+                                type="radio"
+                                id="icon"
+                                name="icon"
+                                value="roundPill"
+                                onChange={(event) => handleChange('icon', event.target.value)} />
+                            <Graphic tag={'roundPill'} />
+                        </div>
+                        <div className="med-graphic-option">
+                            <input
+                                type="radio"
+                                id="icon"
+                                name="icon"
+                                value="dropper"
+                                onChange={(event) => handleChange('icon', event.target.value)} />
+                            <Graphic tag={'dropper'} />
+                        </div>
+                        <div className="med-graphic-option">
+                            <input
+                                type="radio"
+                                id="icon"
+                                name="icon"
+                                value="syringe"
+                                onChange={(event) => handleChange('icon', event.target.value)} />
+                            <Graphic tag={'syringe'} />
+                        </div>
+                        <div className="med-graphic-option">
+                            <input
+                                type="radio"
+                                id="icon"
+                                name="icon"
+                                value="fourPack"
+                                onChange={(event) => handleChange('icon', event.target.value)} />
+                            <Graphic tag={'fourPack'} />
+                        </div>
+                        <div className="med-graphic-option">
+                            <input
+                                type="radio"
+                                id="icon"
+                                name="icon"
+                                value="medicineBottle"
+                                onChange={(event) => handleChange('icon', event.target.value)} />
+                            <Graphic tag={'medicineBottle'} />
+                        </div>
+                        <div className="med-graphic-option">
+                            <input
+                                type="radio"
+                                id="icon"
+                                name="icon"
+                                value="paste"
+                                onChange={(event) => handleChange('icon', event.target.value)} />
+                            <Graphic tag={'paste'} />
+                        </div>
+                        <div className="med-graphic-option">
+                            <input
+                                type="radio"
+                                id="icon"
+                                name="icon"
+                                value="coughSyrup"
+                                onChange={(event) => handleChange('icon', event.target.value)} />
+                            <Graphic tag={'coughSyrup'} />
+                        </div>
+                        <div className="med-graphic-option">
+                            <input
+                                type="radio"
+                                id="icon"
+                                name="icon"
+                                value="inhaler"
+                                onChange={(event) => handleChange('icon', event.target.value)} />
+                            <Graphic tag={'inhaler'} />
+                        </div>
                     </div>
                     <br />
                 </div>
             </div>
-            <button onClick={() => handleSubmit()}>Submit</button>
+            <button className="submit" onClick={() => handleSubmit()}>Submit</button>
             {modal && <div className="modal" onClick={() => setModal(false)}>
                 <div className="modal-confirm">
                     <h4>Please confirm:</h4>
@@ -252,9 +319,9 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     <p>Addn'l Instructions: {formData.userInstructions}</p>
                     <p>{formData.additionalInstructions}</p>
                     <div className="modal-buttons-box">
-                        <button onClick={() => setModal(false)}>Edit</button>
+                        <button className="modal-button" onClick={() => setModal(false)}>Edit</button>
                         <Link to="/">
-                            <button onClick={() => handleMutation()}>Confirm</button>
+                            <button className="modal-button" onClick={() => handleMutation()}>Confirm</button>
                         </Link>
                     </div>
                 </div>

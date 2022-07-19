@@ -1,50 +1,120 @@
 .form-inputs {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    height: 90vh;
+    height: auto;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+
 }
 
-/* .dosage-section {
-    display: flex;
-    flex-direction: column;
-} */
 .reminder-icon-section {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
     align-content: flex-start;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 1%;
+
 }
 
-.modal{
+.modal {
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
-    z-index: 1; 
-    padding-top: 100px; 
+    z-index: 1;
+    padding-top: 100px;
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%; 
-    background-color: rgb(0,0,0, .6); 
+    height: 100%;
+    background-color: rgb(0, 0, 0, .6);
+    padding: 1%;
+
 }
 
-.modal-confirm{
+.modal-confirm {
     margin-top: -20vh;
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
     font-size: 2rem;
     justify-content: space-between;
-    background-color: white;
+    background-color: #FAF6ED;
     width: 60vw;
-    height: 50vh;
+    height: auto;
+    overflow-y: scroll;
     color: black;
+    border-radius: 10px;
+
 }
 
-.modal-buttons-box{
+.modal-buttons-box {
     display: flex;
     justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.icon-selector {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+.checkbox-input {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    margin-left: 20px;
+}
+
+.checkbox-label {
+
+    white-space: nowrap;
+}
+
+
+.submit,
+.modal-button {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    color: black;
+    border: 1px solid white;
+    padding: 7px;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: #A8DADC;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.submit{
+   
+    width: 40vw;
+    min-width: 90px;
+}
+
+.submit:hover {
+    background-color: #1D3557;
+    color: white;
+    font-weight: 800;
+}
+
+.modal-button:hover {
+    background-color: #E63946;
+    color: white;
+    font-weight: 800;
 }

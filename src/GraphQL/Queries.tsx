@@ -7,7 +7,7 @@ export const GET_USER = gql`
             email
             fullName
         } 
-        fetchUserRxs(id:1) {
+        fetchUserRxs(id: 1) {
             id
             medName
             dose

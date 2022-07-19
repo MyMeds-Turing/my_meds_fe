@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Graphic from './../Graphic/Graphic'
 import './Nav.css'
 
 type UserProps = {
@@ -7,12 +8,14 @@ type UserProps = {
 }
 
 
-const Nav: React.FC<UserProps> = ({name}) => {
+const Nav: React.FC<UserProps> = ({ name }) => {
 
     return (
-    
+
         <nav>
-            <h2>Welcome, {name}</h2>
+
+            <h1 className="page-title">MyMeds</h1>
+            <h2 className="welcome-message">Welcome, {name}</h2>
             <NavLink to='/' className='navButton'>
                 Home
             </NavLink>
