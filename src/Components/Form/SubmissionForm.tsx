@@ -173,6 +173,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                             onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'noHeavyMachinery'} />No Heavy Machinery
                         <br />
                         <input
+                            id="takeAM"
                             type="checkbox"
                             name="reminder"
                             value="Take in the Morning"
