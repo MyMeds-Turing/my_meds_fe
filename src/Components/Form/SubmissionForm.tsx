@@ -131,34 +131,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     <option value="tsp(s)">tsp(s)</option>
                 </select>
                 <br />
-
-                {/* 
-                Create separate state for dosage unit, use to interpolate into Total Prescription input?
-                Split dosage input into number and unit dropdown
-                Assumption is that user is filling this out with brand new/full prescription
-                Use unit from dosage input to ask user total amount of units listed in Rx ex. Quantity 30 pills, 500ml
-                Handle change for total doses to make calculation of what dose total is in prescription(dose number divided by total)
-
-                 */}
-                {/* <label htmlFor="doses-remaining">Remaining Doses: </label>
-                <input
-                    onChange={(event) => { handleChange('dosesRemaining', parseInt(event.target.value)) }}
-                    className="doses-remaining"
-                    type='number'
-                    placeholder='0'
-                    min='0'
-                    name='doses-remaining'
-                    value={formData.dosesRemaining} required
-                /> */}
-
-
-                {/* Feedback on ambiguous fields, for MVP just refactor Total Doses field to be more user friendly/informative 
-                
-                
-                */}
-
-                <br />
-                <label htmlFor="doses-total">Total Quantity: </label>
+                <label htmlFor="doses-total">Total Quantity In Prescription : </label>
                 <input
                     onChange={(event) => { handleChange('totalDoses', parseInt(event.target.value)) }}
                     className="doses-total"
@@ -221,7 +194,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                         onChange={(event) => handleChange('additionalInstructions', event.target.value)} />
                     <br />
                     <div className="icon-selector">
-                        <label htmlFor="icon">Choose an icon</label>
+                        <label htmlFor="icon">Choose an icon : </label>
                         <br />
                         <input
                             type="radio"
