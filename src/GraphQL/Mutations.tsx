@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import { MutationRx } from '../interfaces'
-
+// import { ID } from "../Components/App/App";
+// let ID;
 const ADD_RX = gql`
     mutation addRx($userInput: RxInput!){ 
         addRx(input: {
@@ -15,12 +16,13 @@ const ADD_RX = gql`
 
 // const DELETE_RX = gql`
 // mutation {
-//     deleteRx(input: {id: 8}  ) {
+//     deleteRx(input: {id: 1}  ) {
 //             id
 //           }
 //   }`
+
 const DELETE_RX = gql`
-    mutation ($ID: DeleteRxInput!){
+    mutation deleteRx($ID: DeleteRxInput!){
         deleteRx(input: $ID){
             id
         }

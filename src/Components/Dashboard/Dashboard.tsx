@@ -6,12 +6,13 @@ import './Dashboard.css';
 type MedProps = {
     meds: QueryRx[]
     deleteRX: any
+    refetch: any
 }
 
-const Dashboard: React.FC<MedProps> = ({ meds, deleteRX }) => {
+const Dashboard: React.FC<MedProps> = ({ meds, deleteRX, refetch }) => {
     const userMeds = meds.map(rx => {
         return (
-            <MedReminder med={rx} key={rx.id} deleteRX={deleteRX} />
+            <MedReminder med={rx} key={rx.id} deleteRX={deleteRX} refetch={refetch} />
         )
     })
     return (
