@@ -17,7 +17,7 @@ export interface MutationRx {
 }
 
 export interface QueryRx {
-    id: number,
+    id: any,
     medName: string,
     dose: string,
     timeOfNextDose: string,

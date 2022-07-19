@@ -7,7 +7,8 @@ import { Route } from 'react-router-dom'
 import SearchForm from '../Form/SearchForm';
 import Dashboard from '../Dashboard/Dashboard';
 import { GET_USER } from "../../GraphQL/Queries";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
+import { DELETE_RX } from '../../GraphQL/Mutations'
 
 
 
@@ -15,6 +16,7 @@ const App = () => {
   const [user, setUser] = useState<User>()
   const [meds, setMeds] = useState<QueryRx[]>([])
   const { loading, error, data, refetch } = useQuery(GET_USER)
+  const [deleteMed] = useMutation(DELETE_RX)
 
 
   useEffect(() => {
@@ -34,11 +36,16 @@ const App = () => {
     return <h1>SOMETHING WENT WRONG...</h1>
   }
 
-  const updateData = () => {
-    if (data) {
-      setUser(data.fetchUser);
-      setMeds(data.fetchUserRxs)
-    }
+
+  const deleteRX = (ID: number) => {
+    console.log(ID)
+    deleteMed({
+      variables: {
+
+        id: ID
+      }
+    })
+
   }
 
   return (
@@ -47,7 +54,7 @@ const App = () => {
       <Route exact path='/add-new'>
         {user ? <SearchForm userID={meds[0].userId} refetch={refetch} /> : <SearchForm userID={0} refetch={refetch} />}
       </Route>
-      <Route exact path="/"><Dashboard meds={meds} /></Route>
+      <Route exact path="/"><Dashboard meds={meds} deleteRX={deleteRX} /></Route>
     </div>
   );
 }

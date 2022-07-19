@@ -5,12 +5,13 @@ import './Dashboard.css';
 
 type MedProps = {
     meds: QueryRx[]
+    deleteRX: any
 }
 
-const Dashboard: React.FC<MedProps> = ({ meds }) => {
+const Dashboard: React.FC<MedProps> = ({ meds, deleteRX }) => {
     const userMeds = meds.map(rx => {
         return (
-            <MedReminder med={rx} key={rx.id} />
+            <MedReminder med={rx} key={rx.id} deleteRX={deleteRX} />
         )
     })
     return (

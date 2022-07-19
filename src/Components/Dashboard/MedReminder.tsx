@@ -5,15 +5,16 @@ import './MedReminder.css'
 import warningSign from '../../Assets/icons/warningSign.png'
 
 type MedProps = {
-    med: QueryRx
+    med: QueryRx,
+    deleteRX: any
 }
 
-const MedReminder: React.FC<MedProps> = ({ med }) => {
+const MedReminder: React.FC<MedProps> = ({ med, deleteRX }) => {
     const [infoHover, setInfoHover] = useState('hidden')
     const [refillHover, setRefillHover] = useState('hidden')
-    
+
     const showWarning = med.dosesRemaining > (med.totalDoses * .1) ? 'hidden' : ""
-   
+
     const nextDose = new Date(med.timeOfNextDose)
     const timeNow = new Date()
     const formatDate = nextDose.toLocaleString('en-US')
@@ -35,6 +36,7 @@ const MedReminder: React.FC<MedProps> = ({ med }) => {
                 <CountdownTimer targetDate={timeDiff} />
                 <div className="med-button-info-box">
                     <button className="navButton">TAKE YOUR MEDS</button>
+                    <button className='delete-RX' onClick={() => deleteRX(med.id)}>Delete</button>
                     <p className="med-info-hover" onMouseEnter={() => setInfoHover('')} onMouseLeave={() => setInfoHover('hidden')}>ℹ️</p>
                 </div>
             </div>
