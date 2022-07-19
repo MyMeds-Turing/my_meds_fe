@@ -1,7 +1,7 @@
 import { lstat } from 'fs'
 import { aliasQuery, aliasMutation, hasOperationName } from '../utils/graphql-test-utils'
 
-describe('User is able to add a medication to their dashboard', () => {
+describe.skip('User is able to add a medication to their dashboard', () => {
 
     beforeEach(() => {
         cy.intercept('GET', 'https://rxnav.nlm.nih.gov/REST/displaynames.json', { fixture: 'meds-fetch.json' });
