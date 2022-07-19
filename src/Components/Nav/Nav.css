@@ -1,23 +1,56 @@
 nav {
-    display:flex;
+    display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-evenly;
     align-content: center;
     flex-direction: row;
-    background-color: rgb(136, 200, 241);
+    background-color: #457B9D;
 }
 
 .navButton {
+    font-family: 'Montserrat', sans-serif;
     text-decoration: none;
-    color: black;
-    border: 2px solid white;
-    padding: 6px;
-    border-radius: 8px;
-    background-color: rgb(175, 215, 240);
-    cursor: pointer;
-}
-.navButton:hover{
-    background-color: rgb(56, 100, 127);
     color: white;
+    border: 1px solid white;
+    padding: 7px;
+    border-radius: 8px;
+    background-color: #1D3557;
+    cursor: pointer;
+    font-weight: 600;
+    min-width: 90px;
+}
+
+.navButton:hover {
+    background-color: #A8DADC;
+    color: #1D3557;
+    font-weight: 800;
+}
+
+
+
+.welcome-message {
+    color: white;
+}
+
+.page-title {
+    font-size: 4.5vw;
+    color: #F1FAEE;
+    color: #FAF4ED;
+    -webkit-text-stroke-width: .1px;
+    -webkit-text-stroke-color: #A8DADC;
+}
+
+@media only screen and (max-width: 500px) {
+    .page-title {
+        font-size: 35px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+    }
+
+    .welcome-message {
+        display: none;
+    }
 }

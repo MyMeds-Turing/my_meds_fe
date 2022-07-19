@@ -329,7 +329,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     <br />
                 </div>
             </div>
-            <button onClick={() => handleSubmit()}>Submit</button>
+            <button className="submit" onClick={() => handleSubmit()}>Submit</button>
             {modal && <div className="modal" onClick={() => setModal(false)}>
                 <div className="modal-confirm">
                     <h4>Please confirm:</h4>
@@ -338,9 +338,9 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     <p>Addn'l Instructions: {formData.userInstructions}</p>
                     <p>{formData.additionalInstructions}</p>
                     <div className="modal-buttons-box">
-                        <button onClick={() => setModal(false)}>Edit</button>
+                        <button className="modal-button" onClick={() => setModal(false)}>Edit</button>
                         <Link to="/">
-                            <button onClick={() => handleMutation()}>Confirm</button>
+                            <button className="modal-button" onClick={() => handleMutation()}>Confirm</button>
                         </Link>
                     </div>
                 </div>

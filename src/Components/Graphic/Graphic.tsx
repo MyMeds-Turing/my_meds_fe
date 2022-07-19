@@ -14,6 +14,7 @@ import paste from './../../Assets/icons/paste.png'
 import coughSyrup from './../../Assets/icons/cough-syrup.png'
 import inhaler from './../../Assets/icons/inhaler.png'
 import syringe from './../../Assets/icons/syringe.png'
+import pathToIcon from './../../Assets/icons/path_to_icon.png'
 import './Graphic.css'
 
 
@@ -69,6 +70,9 @@ const Graphic: React.FC<ImageProps> = ({ tag }) => {
         }
         if (tag === 'coughSyrup') {
             return coughSyrup
+        }
+        if (tag === 'path_to_icon') {
+            return pathToIcon
         }
     }
     return (
