@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 type MedProps = {
     chosenMedicine: string,
-    userID: number
+    userID: any
     refetch: any
 }
 
@@ -24,7 +24,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
         userInstructions: "",
         additionalInstructions: '',
         icon: '',
-        userId: userID,
+        userId: parseInt(userID),
     })
     const [modal, setModal] = useState<boolean>(false)
     const [frequencyNum, setFrequencyNum] = useState<number>(0)

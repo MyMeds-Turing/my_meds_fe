@@ -6,12 +6,17 @@ import warningSign from '../../Assets/icons/warningSign.png'
 import Graphic from '../Graphic/Graphic'
 
 type MedProps = {
-    med: QueryRx
+    med: QueryRx,
+    deleteRX: any,
+    refetch: any
 }
 
-const MedReminder: React.FC<MedProps> = ({ med }) => {
+const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch }) => {
     const [infoHover, setInfoHover] = useState('hidden')
     const [refillHover, setRefillHover] = useState('hidden')
+
+    const [modal, setModal] = useState(false)
+
 
     const showWarning = med.dosesRemaining > (med.totalDoses * .1) ? 'hidden' : ""
 
@@ -40,7 +45,13 @@ const MedReminder: React.FC<MedProps> = ({ med }) => {
                 <CountdownTimer targetDate={timeDiff} />
                 <div className="med-button-info-box">
                     <button className="navButton">TAKE YOUR MEDS</button>
-                    <p className="med-info-hover" onMouseEnter={() => setInfoHover('')} onMouseLeave={() => setInfoHover('hidden')}> ℹ️</p>
+
+                    <button className='delete-RX' onClick={() => {
+                        deleteRX(med.id)
+                        setModal(true)
+                        }}>Delete</button>
+                    <p className="med-info-hover" onMouseEnter={() => setInfoHover('')} onMouseLeave={() => setInfoHover('hidden')}>ℹ️</p>
+
                 </div>
             </div>
             <div className={`med-info-box ${infoHover}`}>
@@ -51,6 +62,12 @@ const MedReminder: React.FC<MedProps> = ({ med }) => {
             <div className={`med-info-box refill ${refillHover}`}>
                 <p>{`You have ${med.dosesRemaining} doses remaining. Please consider refilling your medicine`}</p>
             </div>
+            {modal && <div className="modal" onClick={() => setModal(false)}>
+                <div className="modal-confirm">
+                    <h4>{med.medName} has been successfully deleted!</h4>
+                    <button className="navButton" onClick={() => refetch()}>Continue</button>
+                </div>
+            </div>}
         </div>
     )
 }
