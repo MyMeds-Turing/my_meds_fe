@@ -34,7 +34,7 @@ const MedReminder: React.FC<MedProps> = ({ med }) => {
                 <p>Next Dose: {formatDay} at {formatDate.substring(10)}</p>
                 <CountdownTimer targetDate={timeDiff} />
                 <div className="med-button-info-box">
-                    <button className="navButton">TAKE YOUR MEDS</button>
+                    <button className="take-med-button">TAKE YOUR MEDS</button>
                     <p className="med-info-hover" onMouseEnter={() => setInfoHover('')} onMouseLeave={() => setInfoHover('hidden')}>ℹ️</p>
                 </div>
             </div>
