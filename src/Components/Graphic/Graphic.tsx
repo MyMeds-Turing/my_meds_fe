@@ -11,6 +11,9 @@ import dropper from './../../Assets/icons/dropper.png'
 import fourPack from './../../Assets/icons/four_pack.png'
 import medicineBottle from './../../Assets/icons/medicine_bottle.png'
 import paste from './../../Assets/icons/paste.png'
+import coughSyrup from './../../Assets/icons/cough-syrup.png'
+import inhaler from './../../Assets/icons/inhaler.png'
+import syringe from './../../Assets/icons/syringe.png'
 import './Graphic.css'
 
 
@@ -58,7 +61,15 @@ const Graphic: React.FC<ImageProps> = ({ tag }) => {
         if (tag === 'paste') {
             return paste
         }
-
+        if (tag === 'syringe') {
+            return syringe
+        }
+        if (tag === 'inhaler') {
+            return inhaler
+        }
+        if (tag === 'coughSyrup') {
+            return coughSyrup
+        }
     }
     return (
         <img src={icon()} alt={altText} className="icon" />
