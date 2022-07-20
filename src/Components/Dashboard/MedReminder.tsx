@@ -53,7 +53,8 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
                 <p>Remaining Doses: {med.dosesRemaining}</p>
             </div>
             <div className={`med-info-box refill ${refillHover}`}>
-                <p>{`You have ${med.dosesRemaining} doses remaining. Please consider refilling your medicine`}</p>
+                <p>{`You have ${med.dosesRemaining} doses remaining.`}</p> 
+                <p> {`Please consider refilling your medicine.`}</p>
             </div>
             {modal && <div className="modal" onClick={() => setModal(false)}>
                 <div className="modal-confirm">
