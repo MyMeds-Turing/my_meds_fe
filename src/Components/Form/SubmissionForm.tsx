@@ -106,7 +106,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     name='frequency-num'
                     required
                 />
-                <select name="frequency" className="form-tag"
+                <select name="frequency" className="form-tag frequency"
                     onChange={(e) => setFrequencyUnits(e.target.value)} required>
                     <option value="hour">hours</option>
                     <option value="day">days</option>
@@ -123,7 +123,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     min='0'
                     onChange={(e) => handleDoseUpdate('amt', e.target.value)}
                 />
-                <select name="dosage-unit" className="form-tag" onChange={(e) => handleDoseUpdate('unit', e.target.value)}>
+                <select name="dosage-unit" className="form-tag unit" onChange={(e) => handleDoseUpdate('unit', e.target.value)}>
                     <option value="pill(s)">pill(s)</option>
                     <option value="mg(s)">mg(s)</option>
                     <option value="ml(s)">ml(s)</option>
