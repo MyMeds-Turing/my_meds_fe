@@ -43,9 +43,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
             dose: `${doseObject.amt} ${doseObject.unit}`,
             totalDoses: Math.floor(formData.totalDoses / parseInt(doseObject.amt))
         })
-
         setModal(true)
-
     }
 
     const handleCheckBoxes = (instruction: string) => {
@@ -68,13 +66,9 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
         setFormData({ ...formData, [field]: userInput })
     }
 
-    //on change of EITHER dose amount or dose unit, we want to update formData.dose with the concatented version
-
     const handleDoseUpdate = (field: string, userInput: string) => {
         console.log(userInput)
         setDoseObject({ ...doseObject, [field]: userInput })
-
-        // setFormData({ ...formData, dose: `${doseObject.amt} ${doseObject.unit}` })
     }
 
     const handleMutation = () => {
@@ -307,7 +301,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     <p>{formData.additionalInstructions}</p>
                     <div className="modal-buttons-box">
                         <button className="modal-button" onClick={() => setModal(false)}>Edit</button>
-                        <Link to="/">
+                        <Link to="/my_meds_fe/">
                             <button className="modal-button" onClick={() => handleMutation()}>Confirm</button>
                         </Link>
                     </div>
