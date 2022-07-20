@@ -1,7 +1,7 @@
 {
   "name": "my_meds_fe",
   "version": "0.1.0",
-  "homepage": "https://MyMeds-Turing.github.io/",
+  "homepage": "https://mymeds-turing.github.io/my_meds_fe/",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.6.9",

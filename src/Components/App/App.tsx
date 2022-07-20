@@ -60,10 +60,10 @@ const App = () => {
   return (
     <main className="App">
       {user ? <Nav name={user.fullName} /> : <Nav name={'No user found'} />}
-      <Route exact path='/add-new'>
+      <Route exact path='/my_meds_fe/add-new'>
         {user && <SearchForm userID={(user.id)} refetch={refetch} />}
       </Route>
-      <Route exact path="/">
+      <Route exact path="/my_meds_fe/">
         {meds.length ? <Dashboard meds={meds} deleteRX={deleteRX} takeRx={takeRx} refetch={refetch} /> :
           <h1>Click on Add Meds Button to get started!</h1>}
       </Route>
