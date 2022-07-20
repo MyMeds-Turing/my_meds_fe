@@ -44,12 +44,12 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch }) => {
                 </div>
                 <CountdownTimer targetDate={timeDiff} />
                 <div className="med-button-info-box">
-                    <button className="navButton">TAKE YOUR MEDS</button>
-
+                    <button className="take-med-button">TAKE YOUR MEDS</button>
                     <button className='delete-RX' onClick={() => {
                         deleteRX(med.id)
                         setModal(true)
                         }}>Delete</button>
+
                     <p className="med-info-hover" onMouseEnter={() => setInfoHover('')} onMouseLeave={() => setInfoHover('hidden')}>ℹ️</p>
 
                 </div>
