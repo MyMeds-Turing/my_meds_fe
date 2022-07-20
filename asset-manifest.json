@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/my_meds_fe/static/css/main.f951519d.css",
+    "main.js": "/my_meds_fe/static/js/main.c65cc290.js",
+    "static/js/787.268fcaf6.chunk.js": "/my_meds_fe/static/js/787.268fcaf6.chunk.js",
+    "index.html": "/my_meds_fe/index.html",
+    "main.f951519d.css.map": "/my_meds_fe/static/css/main.f951519d.css.map",
+    "main.c65cc290.js.map": "/my_meds_fe/static/js/main.c65cc290.js.map",
+    "787.268fcaf6.chunk.js.map": "/my_meds_fe/static/js/787.268fcaf6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f951519d.css",
+    "static/js/main.c65cc290.js"
+  ]
+}
