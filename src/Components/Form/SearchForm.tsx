@@ -24,7 +24,7 @@ const SearchForm: React.FC<UserProps> = ({ userID, refetch }) => {
   const displaySearchResults = (userInput: string) => {
     setChosenMedicine('')
     setDisplayResults(true)
-    const userSearchMeds = allMeds.filter(med => med.includes(userInput))
+    const userSearchMeds = allMeds.filter(med => med.includes(userInput.toLowerCase()))
     const formattedResults = userSearchMeds.map(userMed => {
       return <p className='form__search-result' key={userMed} onClick={() => handleUserChoice(userMed)}>{userMed}</p>
     })

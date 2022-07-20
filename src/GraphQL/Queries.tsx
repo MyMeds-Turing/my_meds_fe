@@ -2,12 +2,12 @@ import { gql } from "@apollo/client";
 
 export const GET_USER = gql`
     query GetUser {
-        fetchUser(id: 1) {
+        fetchUser(id: 2) {
             id
             email
             fullName
         } 
-        fetchUserRxs(id: 1) {
+        fetchUserRxs(id: 2) {
             id
             medName
             dose

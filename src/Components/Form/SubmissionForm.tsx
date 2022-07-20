@@ -23,7 +23,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
         dose: '',
         userInstructions: "",
         additionalInstructions: '',
-        icon: '',
+        icon: 'roundPill',
         userId: parseInt(userID),
     })
     const [modal, setModal] = useState<boolean>(false)
@@ -43,7 +43,8 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
             ...formData,
             timeBetweenDose: frequencyNum * multiplier,
             // userInstructions: formData.userInstructions,
-            dose: `${doseObject.amt} ${doseObject.unit}`
+            dose: `${doseObject.amt} ${doseObject.unit}`,
+            totalDoses: Math.floor(formData.totalDoses / parseInt(doseObject.amt))
         })
 
         setModal(true)
@@ -75,7 +76,6 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
     const handleDoseUpdate = (field: string, userInput: string) => {
         console.log(userInput)
         setDoseObject({ ...doseObject, [field]: userInput })
-        console.log('doseObject onChange event', doseObject, 'formData.dose on doseObject change', formData.dose)
 
         // setFormData({ ...formData, dose: `${doseObject.amt} ${doseObject.unit}` })
     }
@@ -228,11 +228,8 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                                 onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'noHeavyMachinery'} />
                             <p className="checkbox-label">No Heavy Machinery</p>
                         </div>
-
                         <br />
-
                     </div>
-
                     <p>Additional Instructions:</p>
                     <input
                         type="text"
@@ -241,7 +238,6 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                         onChange={(event) => handleChange('additionalInstructions', event.target.value)} />
                     <br />
                     <label htmlFor="icon">Choose an icon</label>
-
                     <div className="icon-selector">
                         <br />
                         <div className="med-graphic-option">
