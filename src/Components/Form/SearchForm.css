@@ -3,7 +3,6 @@
     border-radius: 7px;
     width: 50vw;
     height: 30vh;
-    /* margin-left: 30vw; */
     overflow-y: auto;
 }
 
@@ -41,4 +40,4 @@
     background-color: #1D3557;
     color: white;
     font-weight: 800;
-}
+} 

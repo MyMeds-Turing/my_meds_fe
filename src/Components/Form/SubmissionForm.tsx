@@ -31,9 +31,6 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
     const [frequencyUnits, setFrequencyUnits] = useState<string>('hour')
     const [postMed] = useMutation(ADD_RX)
 
-
-    console.log(formData)
-
     const handleSubmit = () => {
         let multiplier: number;
         frequencyUnits === 'hour' ? multiplier = 60 :
@@ -89,33 +86,12 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
         refetch()
     }
 
-
-
-
     return (
-        <div className='form-inputs'>
-            <div className="frequency-section">
-                <h2>{chosenMedicine}</h2>
-                <label htmlFor="frequency-num">Every</label>
-                <input
-                    onChange={(e) => setFrequencyNum(parseInt(e.target.value))}
-                    className="frequency-num"
-                    type='number'
-                    placeholder='0'
-                    min='0'
-                    name='frequency-num'
-                    required
-                />
-                <select name="frequency" className="form-tag"
-                    onChange={(e) => setFrequencyUnits(e.target.value)} required>
-                    <option value="hour">hours</option>
-                    <option value="day">days</option>
-                    <option value="week">weeks</option>
-                </select>
-
-            </div>
-            <div className="dosage-section">
-
+        <section className='form-inputs'>
+             <h2>{chosenMedicine}</h2>
+        
+            <section className="dosage-section">
+                <label htmlFor="dosage-num">Take</label>
                 <input
                     className="dosage-num"
                     type='number'
@@ -131,6 +107,23 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     <option value="tsp(s)">tsp(s)</option>
                 </select>
                 <br />
+                <label htmlFor="frequency-num"> Every</label>
+                <input
+                    onChange={(e) => setFrequencyNum(parseInt(e.target.value))}
+                    className="frequency-num"
+                    type='number'
+                    placeholder='0'
+                    min='0'
+                    name='frequency-num'
+                    required
+                />
+                <select name="frequency" className="form-tag"
+                    onChange={(e) => setFrequencyUnits(e.target.value)} required>
+                    <option value="hour">hours</option>
+                    <option value="day">days</option>
+                    <option value="week">weeks</option>
+                </select>
+                <br />
                 <label htmlFor="doses-total">Total Quantity In Prescription : </label>
                 <input
                     onChange={(event) => { handleChange('totalDoses', parseInt(event.target.value)) }}
@@ -141,12 +134,11 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     name='doses-total'
                     value={formData.totalDoses} required
                 />
-            </div>
-            <div className="user-instructions">
-                <label htmlFor="user-instructions">Reminders</label>
-
-                <div className="reminders">
-                    <div className="reminder-icon-section">
+            </section>
+            <section className="user-instructions">
+                <label htmlFor="user-instructions">Reminders:</label>
+                <section className="reminders">
+                    <section className="reminder-icon-section">
                         <div className="checkbox-input">
                             <input
                                 type="checkbox"
@@ -155,7 +147,6 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                                 onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />
                             <p className="checkbox-label">Take in the Morning</p>
                         </div>
-
                         <br />
                         <div className="checkbox-input">
                             <input
@@ -198,7 +189,6 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                                 onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'mayInduceDrowziness'} />
                             <p className="checkbox-label">May Induce Drowziness</p>
                         </div>
-
                         <br />
                         <div className="checkbox-input">
                             <input
@@ -209,16 +199,17 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                             <p className="checkbox-label">No Heavy Machinery</p>
                         </div>
                         <br />
-                    </div>
-                    <p>Additional Instructions:</p>
+                    </section>
+                    <label htmlFor="additional-instructions">Additional Instructions:</label>
+                    <br/>
                     <input
+                        className='additional-instructions'
                         type="text"
                         id="reminder"
                         name="reminder"
                         onChange={(event) => handleChange('additionalInstructions', event.target.value)} />
                     <br />
-                    <label htmlFor="icon">Choose an icon</label>
-                    <div className="icon-selector">
+                    <section className="icon-selector">
                         <label htmlFor="icon">Choose an icon : </label>
                         <br />
                         <div className="med-graphic-option">
@@ -302,13 +293,13 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                                 onChange={(event) => handleChange('icon', event.target.value)} />
                             <Graphic tag={'inhaler'} />
                         </div>
-                    </div>
+                    </section>
                     <br />
-                </div>
-            </div>
+                </section>
+            </section>
             <button className="submit" onClick={() => handleSubmit()}>Submit</button>
-            {modal && <div className="modal" onClick={() => setModal(false)}>
-                <div className="modal-confirm">
+            {modal && <section className="modal" onClick={() => setModal(false)}>
+                <article className="modal-confirm">
                     <h4>Please confirm:</h4>
                     <p>{chosenMedicine}</p>
                     <p>{formData.dose}</p>
@@ -320,9 +311,9 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                             <button className="modal-button" onClick={() => handleMutation()}>Confirm</button>
                         </Link>
                     </div>
-                </div>
-            </div>}
-        </div>
+                </article>
+            </section>}
+        </section>
     )
 }
 

@@ -7,7 +7,7 @@ describe('Dashboard', () => {
    //May have issues with GH Actions if we use Before Each?
   // })
 
-  it('Should have Nav bar that greets the user', () => {
+  it.skip('Should have Nav bar that greets the user', () => {
     cy.intercept('POST', 'https://my-meds-be.herokuapp.com/graphql', (req) => { 
 
       const { body } = req
@@ -30,7 +30,7 @@ describe('Dashboard', () => {
     cy.get('.navButton').contains('Add New Med')
   })
 
-it('Should display the users medications, including name, dosage, next dose', () => {   
+it.skip('Should display the users medications, including name, dosage, next dose', () => {   
   cy.intercept('POST', 'https://my-meds-be.herokuapp.com/graphql', (req) => { 
 
      const { body } = req
@@ -58,7 +58,7 @@ it('Should display the users medications, including name, dosage, next dose', ()
   })
 
 
-  it('Should display Take Your Meds button for each med that will decrement from total meds when user clicks', () => {
+  it.skip('Should display Take Your Meds button for each med that will decrement from total meds when user clicks', () => {
     cy.intercept('POST', 'https://my-meds-be.herokuapp.com/graphql', (req) => { 
 
      const { body } = req

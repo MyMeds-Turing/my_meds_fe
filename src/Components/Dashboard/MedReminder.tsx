@@ -53,7 +53,8 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
                 <p>Remaining Doses: {med.dosesRemaining}</p>
             </div>
             <div className={`med-info-box refill ${refillHover}`}>
-                <p>{`You have ${med.dosesRemaining} doses remaining. Please consider refilling your medicine`}</p>
+                <p>{`You have ${med.dosesRemaining} doses remaining.`}</p> 
+                <p> {`Please consider refilling your medicine.`}</p>
             </div>
             {modal && <div className="modal" onClick={() => setModal(false)}>
                 <div className="modal-confirm">
@@ -61,14 +62,19 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
                     <button className="navButton" onClick={() => refetch()}>Continue</button>
                 </div>
             </div>}
-            {confirmationModal && <div className="modal" onClick={() => setModal(false)}>
+            {confirmationModal && <div className="modal" onClick={() => setConfirmationModal(false)}>
                 <div className="modal-confirm">
                     <h4>Are you sure you want to remove {med.medName}?</h4>
+                    <div className="button-container">
+                    <button className="navButton" onClick={() => {
+                        setConfirmationModal(false)
+                    }}>No, Take Me Home</button>
                     <button className="navButton" onClick={() => {
                         deleteRX(med.id)
                         refetch()
                         setConfirmationModal(false)
-                    }}>Confirm</button>
+                    }}>Yes, Delete My Med</button>
+                    </div>
                 </div>
             </div>}
         </div>
