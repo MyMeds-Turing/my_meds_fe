@@ -20,7 +20,7 @@ const Nav: React.FC<UserProps> = ({ name }) => {
                 Home
             </NavLink>
             <NavLink to='/add-new' className='navButton'>
-                Add new med
+                Add New Med
             </NavLink>
         </nav>
     )

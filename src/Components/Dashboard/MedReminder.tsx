@@ -39,7 +39,6 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
                 </div>
                 <p className="next-dose">Next Dose: {formatDay} at {formatDate.substring(10)}</p>
                 <div className="reminder-icons">
-
                 </div>
                 <CountdownTimer targetDate={timeDiff} />
                 <div className="med-button-info-box">

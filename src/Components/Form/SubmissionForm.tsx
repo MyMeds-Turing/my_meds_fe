@@ -131,34 +131,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     <option value="tsp(s)">tsp(s)</option>
                 </select>
                 <br />
-
-                {/* 
-                Create separate state for dosage unit, use to interpolate into Total Prescription input?
-                Split dosage input into number and unit dropdown
-                Assumption is that user is filling this out with brand new/full prescription
-                Use unit from dosage input to ask user total amount of units listed in Rx ex. Quantity 30 pills, 500ml
-                Handle change for total doses to make calculation of what dose total is in prescription(dose number divided by total)
-
-                 */}
-                {/* <label htmlFor="doses-remaining">Remaining Doses: </label>
-                <input
-                    onChange={(event) => { handleChange('dosesRemaining', parseInt(event.target.value)) }}
-                    className="doses-remaining"
-                    type='number'
-                    placeholder='0'
-                    min='0'
-                    name='doses-remaining'
-                    value={formData.dosesRemaining} required
-                /> */}
-
-
-                {/* Feedback on ambiguous fields, for MVP just refactor Total Doses field to be more user friendly/informative 
-                
-                
-                */}
-
-                <br />
-                <label htmlFor="doses-total">Total Quantity: </label>
+                <label htmlFor="doses-total">Total Quantity In Prescription : </label>
                 <input
                     onChange={(event) => { handleChange('totalDoses', parseInt(event.target.value)) }}
                     className="doses-total"
@@ -211,6 +184,12 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                             <p className="checkbox-label">No Alcohol</p>
                         </div>
                         <br />
+                        <input
+                            id="takeAM"
+                            type="checkbox"
+                            name="reminder"
+                            value="Take in the Morning"
+                            onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />Take in the Morning
                         <div className="checkbox-input">
                             <input
                                 type="checkbox"
@@ -219,6 +198,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                                 onChange={(e) => handleCheckBoxes(e.target.value)} /> <Graphic tag={'mayInduceDrowziness'} />
                             <p className="checkbox-label">May Induce Drowziness</p>
                         </div>
+
                         <br />
                         <div className="checkbox-input">
                             <input
@@ -239,6 +219,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     <br />
                     <label htmlFor="icon">Choose an icon</label>
                     <div className="icon-selector">
+                        <label htmlFor="icon">Choose an icon : </label>
                         <br />
                         <div className="med-graphic-option">
                             <input
