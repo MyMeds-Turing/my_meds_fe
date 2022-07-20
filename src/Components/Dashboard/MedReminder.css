@@ -82,6 +82,11 @@
     font-weight: 600;
 }
 
+.delete-rx:hover{
+    background-color: red;
+    color: white;
+}
+
 @media only screen and (max-width: 500px) {
 
     .med-name {
@@ -104,7 +109,6 @@
         height: auto;
 
     }
-
 
     .med-info-box {
         width: 50vw;
