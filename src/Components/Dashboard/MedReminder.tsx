@@ -62,7 +62,7 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
                     <button className="navButton" onClick={() => refetch()}>Continue</button>
                 </div>
             </div>}
-            {confirmationModal && <div className="modal" onClick={() => setModal(false)}>
+            {confirmationModal && <div className="modal" onClick={() => setConfirmationModal(false)}>
                 <div className="modal-confirm">
                     <h4>Are you sure you want to remove {med.medName}?</h4>
                     <div className="button-container">
