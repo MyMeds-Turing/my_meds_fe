@@ -87,6 +87,10 @@
     color: white;
 }
 
+.dosage-section {
+    line-height: 2;
+}
+
 @media only screen and (max-width: 500px) {
 
     .med-name {
