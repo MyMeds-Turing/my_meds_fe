@@ -141,4 +141,9 @@
     height: 50vh;
     color: black;
 }
+
+.button-container{
+display: flex;
+}
+
 }

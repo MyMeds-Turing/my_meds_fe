@@ -64,11 +64,16 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
             {confirmationModal && <div className="modal" onClick={() => setModal(false)}>
                 <div className="modal-confirm">
                     <h4>Are you sure you want to remove {med.medName}?</h4>
+                    <div className="button-container">
+                    <button className="navButton" onClick={() => {
+                        setConfirmationModal(false)
+                    }}>No, Take Me Home</button>
                     <button className="navButton" onClick={() => {
                         deleteRX(med.id)
                         refetch()
                         setConfirmationModal(false)
-                    }}>Confirm</button>
+                    }}>Yes, Delete My Med</button>
+                    </div>
                 </div>
             </div>}
         </div>
