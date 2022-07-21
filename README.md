@@ -48,7 +48,7 @@ You can now view My Meds in the browser.
 
 ## Acknowledgments
 
-* [Turing Scool of Software & Design](https://turing.edu/)
+* [Turing School of Software & Design](https://turing.edu/)
 * Turing Instructors: Kayla Gordon, Nik Seif, and Richard Tillies
 
 
