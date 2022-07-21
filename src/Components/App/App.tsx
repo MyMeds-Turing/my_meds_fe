@@ -24,7 +24,6 @@ const App = () => {
       setUser(data.fetchUser);
       setMeds(data.fetchUserRxs)
     }
-    console.log(data)
   }, [data]);
 
   if (loading) {
@@ -37,7 +36,6 @@ const App = () => {
   }
 
   const takeRx = (id: string) => {
-    console.log(id);
     takeMed({
       variables: {
         ID: {

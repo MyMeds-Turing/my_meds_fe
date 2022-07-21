@@ -27,7 +27,7 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
     const timeDiff = timeNow.getTime() + (nextDose.getTime() - timeNow.getTime())
 
     const formatDay = parseInt(formatDate.substring(2, 4)) === timeNow.getDate() ? 'Today' :
-        parseInt(formatDate.substring(2, 4)) === (timeNow.getDate() + 1) ? 'Tomorrow' : formatDate.substring(0, 8)
+        parseInt(formatDate.substring(2, 4)) === (timeNow.getDate() + 1) ? 'Tomorrow' : formatDate.substring(0, 9)
 
     return (
         <div className="med-box">
@@ -35,6 +35,7 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
                 <div className="med-name-container">
                     <Graphic tag={med.icon} />
                     <h3 className="med-name">{med.dose} of {med.medName}</h3>
+
                     <img className={`warning-icon ${showWarning}`} src={warningSign} onMouseEnter={() => setRefillHover('')} onMouseLeave={() => setRefillHover('hidden')} />
                 </div>
                 <p className="next-dose">Next Dose: {formatDay} at {formatDate.substring(10)}</p>
@@ -42,7 +43,7 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
                 </div>
                 <CountdownTimer targetDate={timeDiff} />
                 <div className="med-button-info-box">
-                    <button className="navButton" disabled={med.dosesRemaining < 1 ? true : false} onClick={() => takeRx(med.id)}>TAKE YOUR MEDS</button>
+                    <button className="navButton take-med-button" disabled={med.dosesRemaining < 1 ? true : false} onClick={() => takeRx(med.id)}>TAKE YOUR MEDS</button>
                     <button className='navButton delete-rx' onClick={() => setConfirmationModal(true)}>DELETE</button>
                     <p className="med-info-hover" onMouseEnter={() => setInfoHover('')} onMouseLeave={() => setInfoHover('hidden')}>ℹ️</p>
                 </div>
@@ -62,7 +63,7 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
                     <button className="navButton" onClick={() => refetch()}>Continue</button>
                 </div>
             </div>}
-            {confirmationModal && <div className="modal" onClick={() => setConfirmationModal(false)}>
+            {confirmationModal && <div className="modal" onClick={() => setModal(false)}>
                 <div className="modal-confirm">
                     <h4>Are you sure you want to remove {med.medName}?</h4>
                     <div className="button-container">
