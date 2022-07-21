@@ -24,7 +24,6 @@ const App = () => {
       setUser(data.fetchUser);
       setMeds(data.fetchUserRxs)
     }
-    console.log(data)
   }, [data]);
 
   if (loading) {
