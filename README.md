@@ -1,46 +1,58 @@
-# Getting Started with Create React App
+# My Meds
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About The Project
 
-## Available Scripts
+This was the Capstone Project for Turing School of Software and Design's Front End Engineering program
 
-In the project directory, you can run:
+ Keeping track of taking prescriptions can be difficult, especially when you’re not feeling 100%. MyMeds is a way for patients to add their prescribed medications to their account so that they can be reminded when to take them and be able to see when they last took a medication. 
 
-### `npm start`
+## Technologies
+* Typescript
+* React | React Router
+* GraphQL
+* Cypress
+* Javascript
+* HTML
+* CSS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Set Up Instructions
+#### Deployed Site
+1. Visit [My Meds](https://mymeds-turing.github.io/my_meds_fe/) via your browser
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Running it Locally
+1. Clone this repo to your local machine
+2. `cd ` into `my_meds_fe`
+3. Then, run `npm install `from your command line. Do not run `npm audit fix --force`
+4. After you run npm install inside of your copy of this repo, run:
+`npm start`
+This command runs the app in the development mode locally so that you can view and use the application in your browser.
+```
+You can now view My Meds in the browser.
+  Local:  http://localhost:3000
+```
 
-### `npm test`
+5. When you are done exploring _**My Meds**_ make sure that you type `Control + C` in your terminal to stop the server before closing your Terminal.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
+## Using the Application
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+----
+## Contributors
+- [Artan Myrtolli](https://github.com/artanmyrtolli)
+- [Angele Williams](https://github.com/angelewilliams)
+- [Emma Brooke-Davison](https://github.com/emmacbd)
+- [Shane Warning](https://github.com/shanekwarning)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Acknowledgments
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* [Turing Scool of Software & Design](https://turing.edu/)
+* Turing Instructors: Kayla Gordon, Nik Seif, and Richard Tillies
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Planning Resources
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* [MVP Planning](https://docs.google.com/document/d/1C7LFljKyxIkO9ogI7R2PjjXUXgr_XO0IjzoGo8atpd0/edit)
+* [Project Spec](https://mod4.turing.edu/projects/capstone/)
