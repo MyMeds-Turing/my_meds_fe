@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import { MutationRx } from '../interfaces'
 
 const ADD_RX = gql`
     mutation addRx($userInput: RxInput!){ 

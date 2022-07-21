@@ -93,7 +93,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     min='0'
                     onChange={(e) => handleDoseUpdate('amt', e.target.value)}
                 />
-                <select name="dosage-unit" className="form-tag" onChange={(e) => handleDoseUpdate('unit', e.target.value)}>
+                <select name="dosage-unit" className="form-tag dosage-unit" onChange={(e) => handleDoseUpdate('unit', e.target.value)}>
                     <option value="pill(s)">pill(s)</option>
                     <option value="mg(s)">mg(s)</option>
                     <option value="ml(s)">ml(s)</option>

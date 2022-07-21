@@ -43,7 +43,7 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
                 </div>
                 <CountdownTimer targetDate={timeDiff} />
                 <div className="med-button-info-box">
-                    <button className="navButton" disabled={med.dosesRemaining < 1 ? true : false} onClick={() => takeRx(med.id)}>TAKE YOUR MEDS</button>
+                    <button className="navButton take-med-button" disabled={med.dosesRemaining < 1 ? true : false} onClick={() => takeRx(med.id)}>TAKE YOUR MEDS</button>
                     <button className='navButton delete-rx' onClick={() => setConfirmationModal(true)}>DELETE</button>
                     <p className="med-info-hover" onMouseEnter={() => setInfoHover('')} onMouseLeave={() => setInfoHover('hidden')}>ℹ️</p>
                 </div>

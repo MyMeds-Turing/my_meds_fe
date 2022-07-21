@@ -36,7 +36,6 @@ const App = () => {
   }
 
   const takeRx = (id: string) => {
-    console.log(id);
     takeMed({
       variables: {
         ID: {
