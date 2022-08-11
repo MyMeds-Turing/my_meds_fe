@@ -20,6 +20,7 @@ const App = () => {
   const [takeMed] = useMutation(TAKE_RX)
 
   useEffect(() => {
+    /// change this to be based on what credentials were inputed (if correct)
     if (data) {
       setUser(data.fetchUser);
       setMeds(data.fetchUserRxs)

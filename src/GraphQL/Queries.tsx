@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client";
 
+//change the query request to be dynamic based upon userID
+
 export const GET_USER = gql`
     query GetUser {
         fetchUser(id: 2) {
@@ -22,4 +24,26 @@ export const GET_USER = gql`
     }
 `
 
+//Potential next steps: 
+/* query the list of all users on load (maybe) so that 
+when user inputs credentials can check against fetched data
+IF credential match, keep track of user ID and fetch specific 
+user data 
 
+*/
+
+// export const GET_ALL_USERS = gql`
+// query GetAllUsers {
+//     fetchUsers {
+//       id
+//       firstName
+//       lastName
+//       fullName
+//       email
+//       sms
+//       notify
+//       createdAt
+//       updatedAt
+//     }
+// }
+// `
