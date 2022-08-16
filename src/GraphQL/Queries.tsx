@@ -32,18 +32,11 @@ user data
 
 */
 
-// export const GET_ALL_USERS = gql`
-// query GetAllUsers {
-//     fetchUsers {
-//       id
-//       firstName
-//       lastName
-//       fullName
-//       email
-//       sms
-//       notify
-//       createdAt
-//       updatedAt
-//     }
-// }
-// `
+export const GET_ALL_USERS = gql`
+query GetAllUsers {
+    fetchUsers {
+      id
+      email
+    }
+}
+`

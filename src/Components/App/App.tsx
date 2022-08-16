@@ -5,17 +5,20 @@ import { User } from '../../interfaces'
 import { QueryRx } from '../../interfaces'
 import { Route } from 'react-router-dom'
 import SearchForm from '../Form/SearchForm';
+import Login from '../Login/Login';
 import Dashboard from '../Dashboard/Dashboard';
-import { GET_USER } from "../../GraphQL/Queries";
+import { GET_ALL_USERS, GET_USER } from "../../GraphQL/Queries";
 import { useQuery, useMutation } from "@apollo/client";
 import { DELETE_RX, TAKE_RX } from '../../GraphQL/Mutations'
 // export {ID}
 // let ID = 0
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState<User>()
   const [meds, setMeds] = useState<QueryRx[]>([])
   const { loading, error, data, refetch } = useQuery(GET_USER)
+
   const [deleteMed] = useMutation(DELETE_RX)
   const [takeMed] = useMutation(TAKE_RX)
 
@@ -60,6 +63,7 @@ const App = () => {
 
   return (
     <main className="App">
+      {!isLoggedIn ? <Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} /> : ''}
       {user ? <Nav name={user.fullName} /> : <Nav name={'No user found'} />}
       <Route exact path='/add-new'>
         {user && <SearchForm userID={(user.id)} refetch={refetch} />}
