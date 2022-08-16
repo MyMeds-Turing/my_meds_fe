@@ -1,59 +1,72 @@
 import { useQuery } from "@apollo/client";
+import { clear } from "console";
 import React, { useEffect, useState } from "react"
-import { GET_ALL_USERS } from "../../GraphQL/Queries";
+import { GET_USER } from "../../GraphQL/Queries";
 import { AllUsersObj, LoginErrorMessage } from '../../interfaces'
 import './Login.css'
 
 
 type LoginProps = {
     setUser: any
+    setMeds: any
     setIsLoggedIn: any
+    allUsers: AllUsersObj[]
 }
 
-const Login: React.FC<LoginProps> = ({ setUser }) => {
+const Login: React.FC<LoginProps> = ({ setUser, setMeds, setIsLoggedIn, allUsers }) => {
 
-
-    const [allUsers, setAllUsers] = useState<AllUsersObj[]>([]);
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [userIDToLogin, setUserIDToLogin] = useState('')
     const [errorMessages, setErrorMessages] = useState<LoginErrorMessage>({ name: '', message: '' });
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const { loading, error, data } = useQuery(GET_ALL_USERS)
+    // const [isSubmitted, setIsSubmitted] = useState(false);
+
+
+    const { loading, error, data } = useQuery(GET_USER, {
+        variables: {
+            userId: userIDToLogin
+        }
+    })
+
     useEffect(() => {
+        /// change this to be based on what credentials were inputed (if correct)
+        //also make sure timing works with sending user to APP 
         if (data) {
-            setAllUsers(data);
+            setUser(data.fetchUser);
+            setMeds(data.fetchUserRxs)
         }
         console.log(data)
-    }, [data]);
+    }, [userIDToLogin]);
 
-    if (loading) {
-        return <h1>LOADING...</h1>
-    }
+    // if (loading) {
+    //     return <h1>LOADING...</h1>
+    // }
 
-    if (error) {
-        console.log(error)
-        return <h1>SOMETHING WENT WRONG...</h1>
-    }
+    // if (error) {
+    //     console.log(error)
+    //     return <h1>SOMETHING WENT WRONG...</h1>
+    // }
 
 
     const handleSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        console.log(e)
-        console.log(allUsers.find((user) => user.email.toLowerCase() === username.toLowerCase()))
-        // Find user login info
-        // const userData = allUsers.find((user) => user.email.toLowerCase() === username.toLowerCase());
+        e.preventDefault()
+        const userToLogin = allUsers.find((user) => user.email.toLowerCase() === username.toLowerCase());
 
-        // // Compare user info
-        // if (userData) {
-        //     if (password !== 'password') {
-        //         // Invalid password
-        //         setErrorMessages({ name: "pass", message: errors.pass });
-        //     } else {
-        //         setIsSubmitted(true);
-        //     }
-        // } else {
-        //     // Username not found
-        //     setErrorMessages({ name: "uname", message: errors.uname });
-        // }
+        if (userToLogin && password === 'password') {
+            console.log('userid', userToLogin.id)
+            //then fetch the user data based on id and set user and user meds, sending data back up to app 
+            setUserIDToLogin(userToLogin.id)
+
+
+        } else if (password !== 'password') {
+            console.log('incorrect password')
+            setErrorMessages({ name: "pass", message: errors.pass });
+        } else {
+            console.log('Username not found')
+
+            setErrorMessages({ name: "uname", message: errors.uname });
+        }
+
     };
 
     const handleUsernameChange = (userInput: string) => {
@@ -73,6 +86,12 @@ const Login: React.FC<LoginProps> = ({ setUser }) => {
         uname: "invalid username",
         pass: "invalid password"
     };
+
+    const clearForm = () => {
+        setErrorMessages({ name: '', message: '' })
+        setUsername('')
+        setPassword('')
+    }
 
     return (
         <div className="login-container">
