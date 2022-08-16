@@ -63,7 +63,8 @@ const App = () => {
 
   return (
     <main className="App">
-      {!isLoggedIn ? <Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} /> : ''}
+      {!isLoggedIn ? <Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} /> : 
+        <div>
       {user ? <Nav name={user.fullName} /> : <Nav name={'No user found'} />}
       <Route exact path='/add-new'>
         {user && <SearchForm userID={(user.id)} refetch={refetch} />}
@@ -72,6 +73,8 @@ const App = () => {
         {meds.length ? <Dashboard meds={meds} deleteRX={deleteRX} takeRx={takeRx} refetch={refetch} /> :
           <h1>Click on Add Meds Button to get started!</h1>}
       </Route>
+      </div>
+      }
     </main>
   );
 }

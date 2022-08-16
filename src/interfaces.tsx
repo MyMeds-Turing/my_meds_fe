@@ -33,3 +33,14 @@ export interface doseInfo {
     amt: string,
     unit: string
 }
+
+export interface AllUsersObj {
+    id: string
+    email: string
+    __typename: string
+}
+
+export interface LoginErrorMessage {
+    message?: string
+    name?: string
+}

@@ -88,8 +88,8 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
 
     return (
         <section className='form-inputs'>
-             <h2>{chosenMedicine}</h2>
-        
+            <h2>{chosenMedicine}</h2>
+
             <section className="dosage-section">
                 <label htmlFor="dosage-num">Take</label>
                 <input
@@ -201,7 +201,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                         <br />
                     </section>
                     <label htmlFor="additional-instructions">Additional Instructions:</label>
-                    <br/>
+                    <br />
                     <input
                         className='additional-instructions'
                         type="text"

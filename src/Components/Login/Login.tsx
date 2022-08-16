@@ -1,6 +1,8 @@
 import { useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react"
 import { GET_ALL_USERS } from "../../GraphQL/Queries";
+import { AllUsersObj, LoginErrorMessage } from '../../interfaces'
+import './Login.css'
 
 
 type LoginProps = {
@@ -11,44 +13,48 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = ({ setUser }) => {
 
 
-    const [allUsers, setAllUsers] = useState([]);
+    const [allUsers, setAllUsers] = useState<AllUsersObj[]>([]);
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [errorMessages, setErrorMessages] = useState({});
+    const [errorMessages, setErrorMessages] = useState<LoginErrorMessage>({ name: '', message: '' });
     const [isSubmitted, setIsSubmitted] = useState(false);
     const { loading, error, data } = useQuery(GET_ALL_USERS)
     useEffect(() => {
-        /// change this to be based on what credentials were inputed (if correct)
         if (data) {
             setAllUsers(data);
         }
         console.log(data)
     }, [data]);
 
+    if (loading) {
+        return <h1>LOADING...</h1>
+    }
+
+    if (error) {
+        console.log(error)
+        return <h1>SOMETHING WENT WRONG...</h1>
+    }
 
 
-    // const handleSubmit = (event) => {
-    //     //Prevent page reload
-    //     event.preventDefault();
+    const handleSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+        console.log(e)
+        console.log(allUsers.find((user) => user.email.toLowerCase() === username.toLowerCase()))
+        // Find user login info
+        // const userData = allUsers.find((user) => user.email.toLowerCase() === username.toLowerCase());
 
-    //     var { uname, pass } = document.forms[0];
-
-    //     // Find user login info
-    //     const userData = allUsers.find((user) => user.email === uname.value);
-
-    //     // Compare user info
-    //     if (userData) {
-    //         if (userData.password !== pass.value) {
-    //             // Invalid password
-    //             setErrorMessages({ name: "pass", message: errors.pass });
-    //         } else {
-    //             setIsSubmitted(true);
-    //         }
-    //     } else {
-    //         // Username not found
-    //         setErrorMessages({ name: "uname", message: errors.uname });
-    //     }
-    // };
+        // // Compare user info
+        // if (userData) {
+        //     if (password !== 'password') {
+        //         // Invalid password
+        //         setErrorMessages({ name: "pass", message: errors.pass });
+        //     } else {
+        //         setIsSubmitted(true);
+        //     }
+        // } else {
+        //     // Username not found
+        //     setErrorMessages({ name: "uname", message: errors.uname });
+        // }
+    };
 
     const handleUsernameChange = (userInput: string) => {
         setUsername(userInput)
@@ -58,9 +64,20 @@ const Login: React.FC<LoginProps> = ({ setUser }) => {
         setPassword(userInput)
     }
 
+    const renderErrorMessage = (name: string) =>
+        name === errorMessages.name && (
+            <div className="error">{errorMessages.message}</div>
+        );
+
+    const errors = {
+        uname: "invalid username",
+        pass: "invalid password"
+    };
+
     return (
-        <div className="form">
-            <form>
+        <div className="login-container">
+            <h1 className="page-title">MyMeds</h1>
+            <form className="login-form">
                 <div className="input-container">
                     <label>Username </label>
                     <input
@@ -68,7 +85,11 @@ const Login: React.FC<LoginProps> = ({ setUser }) => {
                         type="text"
                         name="uname"
                         placeholder="email"
-                        required />
+                        value={username}
+                        required
+                    />
+                    {renderErrorMessage("uname")}
+
                 </div>
                 <div className="input-container">
                     <label>Password </label>
@@ -76,12 +97,20 @@ const Login: React.FC<LoginProps> = ({ setUser }) => {
                         onChange={(e) => handlePasswordChange(e.target.value)}
                         type="password"
                         name="pass"
+                        value={password}
                         placeholder="password"
                         required
                     />
+                    {renderErrorMessage("pass")}
+
                 </div>
                 <div className="button-container">
-                    <input type="submit" />
+                    <input
+                        className="submit"
+                        type="submit"
+                        onClick={(e) => handleSubmit(e)}
+                    />
+
                 </div>
             </form>
         </div>
