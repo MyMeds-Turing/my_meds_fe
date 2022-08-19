@@ -39,7 +39,6 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
         setFormData({
             ...formData,
             timeBetweenDose: frequencyNum * multiplier,
-            // userInstructions: formData.userInstructions,
             dose: `${doseObject.amt} ${doseObject.unit}`,
             totalDoses: Math.floor(formData.totalDoses / parseInt(doseObject.amt))
         })
@@ -135,6 +134,7 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                     <section className="reminder-icon-section">
                         <div className="checkbox-input">
                             <input
+                                id="takeAM"
                                 type="checkbox"
                                 name="reminder"
                                 value="Take in the Morning"
@@ -169,12 +169,6 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
                             <p className="checkbox-label">No Alcohol</p>
                         </div>
                         <br />
-                        <input
-                            id="takeAM"
-                            type="checkbox"
-                            name="reminder"
-                            value="Take in the Morning"
-                            onChange={(e) => handleCheckBoxes(e.target.value)} />  <Graphic tag={'takeInTheMorning'} />Take in the Morning
                         <div className="checkbox-input">
                             <input
                                 type="checkbox"
