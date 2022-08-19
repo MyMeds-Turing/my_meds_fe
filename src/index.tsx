@@ -16,16 +16,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-//pulled from Pedro example, need to figure out how to make TypeScript happy 
-
-// const errorLink = onError(({ graphqlErrors, networkError }) => {
-//   if (graphqlErrors) {
-//     graphqlErrors.map(({ message, location, path }) => {
-//       alert(`Graphql error ${message}`);
-//     });
-//   }
-// });
-
 const link = from([
   // errorLink,
   new HttpLink({ uri: "https://my-meds-be.herokuapp.com/graphql" }),
