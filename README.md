@@ -8,7 +8,7 @@ Keeping track of taking prescriptions can be difficult, especially when you’re
 
 ## Click the MyMeds logo below to see the deployed app!
 <p align="center">
-  <a href="https://mymeds-turing.github.io/my_meds_fe/" target="new" rel="noopener noreferrer"><img src="https://user-images.githubusercontent.com/93603551/186750672-1dfd836c-121d-4326-81eb-1007933b2147.png" alt="logo" width="80%"/>
+  <a href="https://mymeds-turing.github.io/my_meds_fe/" target="new"><img src="https://user-images.githubusercontent.com/93603551/186750672-1dfd836c-121d-4326-81eb-1007933b2147.png" alt="logo" width="80%"/>
 </p>
 
 
