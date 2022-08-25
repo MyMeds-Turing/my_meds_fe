@@ -22,8 +22,6 @@ Keeping track of taking prescriptions can be difficult, especially when you’re
 * CSS
 
 ## Set Up Instructions
-#### Deployed Site
-1. Visit [My Meds](https://mymeds-turing.github.io/my_meds_fe/) via your browser
 
 #### Running it Locally
 1. Clone this repo to your local machine
