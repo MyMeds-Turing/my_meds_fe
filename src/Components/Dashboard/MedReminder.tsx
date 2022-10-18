@@ -27,7 +27,7 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
     const timeDiff = timeNow.getTime() + (nextDose.getTime() - timeNow.getTime())
 
     const formatDay = parseInt(formatDate.substring(2, 4)) === timeNow.getDate() ? 'Today' :
-        parseInt(formatDate.substring(2, 4)) === (timeNow.getDate() + 1) ? 'Tomorrow' : formatDate.substring(0, 9)
+        parseInt(formatDate.substring(2, 4)) === (timeNow.getDate() + 1) ? 'Tomorrow' : formatDate.substring(0, 10)
 
     return (
         <div className="med-box">
@@ -38,7 +38,7 @@ const MedReminder: React.FC<MedProps> = ({ med, deleteRX, refetch, takeRx }) => 
 
                     <img className={`warning-icon ${showWarning}`} src={warningSign} onMouseEnter={() => setRefillHover('')} onMouseLeave={() => setRefillHover('hidden')} />
                 </div>
-                <p className="next-dose">Next Dose: {formatDay} at {formatDate.substring(10)}</p>
+                <p className="next-dose">Next Dose: {formatDay} at {formatDate.substring(12)}</p>
                 <div className="reminder-icons">
                 </div>
                 <CountdownTimer targetDate={timeDiff} />
