@@ -8,7 +8,6 @@ type UserProps = {
 }
 
 const SearchForm: React.FC<UserProps> = ({ userID, refetch }) => {
-  console.log(userID)
   const [chosenMedicine, setChosenMedicine] = useState<string>('')
   const [allMeds, setAllMeds] = useState<Array<string>>([])
   const [displayResults, setDisplayResults] = useState<boolean>(false)

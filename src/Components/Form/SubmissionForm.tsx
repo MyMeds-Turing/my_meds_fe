@@ -48,13 +48,11 @@ const SubmissionForm: React.FC<MedProps> = ({ chosenMedicine, userID, refetch })
     const handleCheckBoxes = (instruction: string) => {
 
         let addInstructions = formData.userInstructions
-        console.log('addinstructions', addInstructions.split(', '));
         if (!addInstructions.split(', ').includes(instruction)) {
             addInstructions += instruction + ', '
         } else {
             addInstructions = addInstructions.split(', ').filter(ins => ins !== instruction).join(', ')
         }
-
         setFormData({
             ...formData,
             userInstructions: addInstructions
